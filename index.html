@@ -1,0 +1,2615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#C8102E">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Healing Touch">
+<meta name="application-name" content="Healing Touch">
+<!-- red-cross app icon: SVG favicon, PNG apple-touch-icon, inline manifest for installs -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Crect%20width%3D%2264%22%20height%3D%2264%22%20rx%3D%224%22%20fill%3D%22%23FFFFFF%22%2F%3E%3Crect%20x%3D%221.75%22%20y%3D%221.75%22%20width%3D%2260.5%22%20height%3D%2260.5%22%20rx%3D%223%22%20fill%3D%22none%22%20stroke%3D%22%234B5320%22%20stroke-width%3D%223.5%22%2F%3E%3Crect%20x%3D%2225.6%22%20y%3D%2212.8%22%20width%3D%2212.8%22%20height%3D%2238.4%22%20fill%3D%22%23C8102E%22%2F%3E%3Crect%20x%3D%2212.8%22%20y%3D%2225.6%22%20width%3D%2238.4%22%20height%3D%2212.8%22%20fill%3D%22%23C8102E%22%2F%3E%3C%2Fsvg%3E">
+<link rel="apple-touch-icon" sizes="180x180" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAIAAACyr5FlAAABm0lEQVR42u3csQ2DQAxAUYhuATYgE1BmCOhgzJRZgpIJGCErsACioDDIvNdSoDt9+TrX/dhWsOflChAH4kAciANxIA7EgTjIrhx//n1Xd5TYML1NDjwriANxIA7EgTgQB+JAHCAOxIE4EAfiQByIA3EgDsQB4kAciANxIA7uomQ92Nx0kb/7/BeTA88KiANxIA7EgTgQB+JAHIgDcSAOEAfiQByIA3EgDsSBOBAH4gBxIA7EgTgQB+JAHIgDcSAOEAfi4JTQnWDBe7qyHi1s/5jJgTgQB+JAHIgDcSAOxIE4EAeIA3EgDsSBOBAH4kAciANxgDgQB+JAHIgDcSAOxIE4EAeIA3EgDsSBOLhW6MK4sE1nVfhyusijmRyIA3EgDsSBOBAHiANxIA7EgTgQB+JAHIgDcYA4EAfiQByIA3EgDsSBOBAHiANxIA7EgTgQB+JAHORSsh4s5ZIukwNxIA7EgTgQB4gDcSAOxIE4EAfiQByIA3EgDhAH4kAciANxIA7EQQJ1P7ZuAZMDcSAOxIE4EAfiQByIg2faAERuE+RoIR43AAAAAElFTkSuQmCC">
+<link rel="manifest" href="data:application/manifest+json,%7B%22name%22%3A%22Healing%20Touch%22%2C%22short_name%22%3A%22Healing%20Touch%22%2C%22description%22%3A%22Turn%20tracker%20for%20Oggie%20Manowar%2C%20human%20monk%2C%20Way%20of%20Mercy.%22%2C%22start_url%22%3A%22.%22%2C%22display%22%3A%22standalone%22%2C%22orientation%22%3A%22portrait%22%2C%22background_color%22%3A%22%23F5F6EF%22%2C%22theme_color%22%3A%22%23C8102E%22%2C%22icons%22%3A%5B%7B%22src%22%3A%22data%3Aimage%2Fpng%3Bbase64%2CiVBORw0KGgoAAAANSUhEUgAAAMAAAADACAIAAADdvvtQAAABs0lEQVR42u3csQ2DMBBA0RB5ATYgE1AyBHQwJmWWoGSCjJAVKDJAJAQ24t6rkZCtr3N3VT82D9jr6QoQEAJCQAgIBISAEBACAgFxqvT3i%2Ff8cU1hDdPLBMIThoAQEAgIASEgBAQCQkAICAEhIBAQAkJACAgEhIAQEAICASEgBISAQEAcIQU551K3%2BX%2FafVcTCASEgBAQAgIBISAEhIBAQAgIASEgBAQCQkAICAGBgBAQAkJAICAEhIAQEAgIASEgBISAQEAICAEhIBAQAkJA3FqBNb9FNu4WEWG3sAmEgBAQAkJAICAEhIAQEAgIASEgBAQCQkAICAGBgBAQAkJACAgEhIAQEAICASEgBISAQEAICAEhIBAQAkJACIjYCqz5zbyH9ifCxl0TCAEhIBAQAkJACAgEhIAQEAICASEgBISAQEAICAEhIAQEAkJACAgBgYAQEAJCQCAgBISAEBAICAEhIASEgEBAZJeCnDPCxl0TCAEhIBAQAkJACAgEhIAQEAICASEgBISAQEAICAEhIAQEAkJACAgBgYA4V9WPjVvABEJACAgBgYAQEAJCQCAgBMRFbd5tE%2FzdbuFMAAAAAElFTkSuQmCC%22%2C%22sizes%22%3A%22192x192%22%2C%22type%22%3A%22image%2Fpng%22%2C%22purpose%22%3A%22any%22%7D%2C%7B%22src%22%3A%22data%3Aimage%2Fpng%3Bbase64%2CiVBORw0KGgoAAAANSUhEUgAAAgAAAAIACAIAAAB7GkOtAAAF7ElEQVR42u3XwQ3CIBiGYWpYoBvUCTgyRL3VMT26BEcm6Ais4Aw0Wg0%2BzwAcvpC8%2Bad1WwIA%2F%2BdiAgABAEAAABAAAAQAAAEAQAAAEAAABAAAAQBAAAAQAAAEAAABAEAAABAAAAQAAAEAQAAAEAAABAAAAQBAAAAQAAABAEAAABAAAMYVP%2FHo87FbFuCNbverCwAAAQBAAAAQAAAEAAABAEAAABAAAAEAQAAAEAAABAAAAQBAAAAQAAAEAAABAEAAABAAAAQAAAEAQAAAEAAABAAAAQBAAAAQAAAEAAABAEAAABAAAAEAQAAAEAAABAAAAQBAAAAQAAAEAAABAEAAABAAAAQAAAEAQAAAEAAABAAAAQBAAAAQAAAEAAABAEAAABAAAAQAQAAAEAAABAAAAQBAAAAQAAAEAAABAEAAABAAAAQAAAEAQAAAEAAABAAAAQBAAAAQAACOiCbgBGVORuiVWzUCLgAABAAAAQBAAAAQAAAEAAABAEAAABAAAAEAQAAAEAAABAAAAQBAAAAQAAAEAAABAEAAABAAAAQAAAEAQAAAEAAABAAAAQBAAAAQAAAEAAABAEAAABAAAAEwAYAAACAAAAgAAAIAgAAAIAAACAAAAgCAAAAgAAAIAAACAIAAACAAAAgAAAIAgAAAIAAACAAAAgCAAAAgAAAIAIAAACAAAAgAAAIAgAAAIAAACAAAAgCAAAAgAAAIAAACAIAAACAAAAgAAAIAgAAAIAAACAAAAgCAAAAgAAAIAIAAACAAAAgAAAIAgAAAIAAACAAAAgCAAAAgAAAIAAACAIAAACAAAAgAAAIAgAAAIAAACAAAAgCAAAAgAAAIAAAhhGiCXmVORsBP%2B025VSO4AAAQAAAEAAABABAAAAQAAAEAQAAAEAAABAAAAQBAAAAQAAAEAAABAEAAABAAAAQAAAEAQAAAEAAABAAAAQBAAAAQAAAEAAABAEAAAAQAAAEAQAAAEAAABAAAAQBAAAAQAAAEAAABAEAAABAAAAQAAAEAQAAAEAAABAAAAQBAAAAQAAAEAAABAEAAAAQAAAEAQAAAEAAABAAAAQBAAAAQAAAEAAABAEAAABAAAAQAAAEAQAAAEAAABAAAAQBAAAAQAAAEAAABAEAAABAAAAEAQAAAEAAABAAAAQBAAAAQAAAEAAABAEAAABAAAAQAAAEAQAAAEAAABAAAAQBAAAAQAAAEAAABAEAAABAAAAEAQAAAEAAABACA8UQT9MqtGqFXmZMR%2FDRcAAAIAAACAIAAACAAAAgAAAIAgAAAIAAACAAAAgCAAAAgAAAIAIAAACAAAAgAAAIAgAAAIAAACAAAAgCAAAAgAAAIAAACAIAAACAAAAgAAAIAgAAAIAAACAAAAgCAAAAgAAAIAIAAACAAAAgAAAIAgAAAIAAACAAAAgCAAAAgAAAIAAACAIAAACAAAAgAAAIAgAAAIAAACAAAAgCAAAAgAAAIAAACACAAAAgAAAIAgAAAIAAACAAAAgCAAAAgAAAIAAACAIAAACAAAAgAAAIAgAAAIAAACAAAAgCAAAAgAAAIAAACACAAAAgAAAIAgAAAIAAACAAAAgCAAAAgAAAIAAACAIAAACAAAAgAAAIAgAAAIAAACAAAx0QTcILcqhHABQCAAAAgAAAIAAACAIAAACAAAAgAAAIAgAAAIAAACAAAAgCAAAAIAAACAIAAACAAAAgAAAIAgAAAIAAACAAAAgCAAAAgAAAIAAACAIAAACAAAAgAAAIAgAAAIAAACAAAAgCAAAAIAAACAIAAACAAAAgAAAIAgAAAIAAACAAAAgCAAAAgAAAIAAACAIAAACAAAAgAAAIAgAAAIAAACAAAAgCAAAAgAAACAIAAACAAAAgAAAIAgAAAIAAACAAAAgCAAAAgAAB817RuixUAXAAACAAAAgCAAAAgAAAIAAACAIAAACAAAAgAAAIAgAAAIAAACAAAAgCAAAAgAAAIAAACAIAAACAAAAgAAAIAIAAACAAAAgCAAAAwkhfpcxZ8jD6JTgAAAABJRU5ErkJggg%3D%3D%22%2C%22sizes%22%3A%22512x512%22%2C%22type%22%3A%22image%2Fpng%22%2C%22purpose%22%3A%22any%22%7D%2C%7B%22src%22%3A%22data%3Aimage%2Fpng%3Bbase64%2CiVBORw0KGgoAAAANSUhEUgAAAgAAAAIACAIAAAB7GkOtAAAF7ElEQVR42u3XwQ3CIBiGYWpYoBvUCTgyRL3VMT26BEcm6Ais4Aw0Wg0%2BzwAcvpC8%2Bad1WwIA%2F%2BdiAgABAEAAABAAAAQAAAEAQAAAEAAABAAAAQBAAAAQAAAEAAABAEAAABAAAAQAAAEAQAAAEAAABAAAAQBAAAAQAAABAEAAABAAAMYVP%2FHo87FbFuCNbverCwAAAQBAAAAQAAAEAAABAEAAABAAAAEAQAAAEAAABAAAAQBAAAAQAAAEAAABAEAAABAAAAQAAAEAQAAAEAAABAAAAQBAAAAQAAAEAAABAEAAABAAAAEAQAAAEAAABAAAAQBAAAAQAAAEAAABAEAAABAAAAQAAAEAQAAAEAAABAAAAQBAAAAQAAAEAAABAEAAABAAAAQAQAAAEAAABAAAAQBAAAAQAAAEAAABAEAAABAAAAQAAAEAQAAAEAAABAAAAQBAAAAQAACOiCbgBGVORuiVWzUCLgAABAAAAQBAAAAQAAAEAAABAEAAABAAAAEAQAAAEAAABAAAAQBAAAAQAAAEAAABAEAAABAAAAQAAAEAQAAAEAAABAAAAQBAAAAQAAAEAAABAEAAABAAAAEwAYAAACAAAAgAAAIAgAAAIAAACAAAAgCAAAAgAAAIAAACAIAAACAAAAgAAAIAgAAAIAAACAAAAgCAAAAgAAAIAIAAACAAAAgAAAIAgAAAIAAACAAAAgCAAAAgAAAIAAACAIAAACAAAAgAAAIAgAAAIAAACAAAAgCAAAAgAAAIAIAAACAAAAgAAAIAgAAAIAAACAAAAgCAAAAgAAAIAAACAIAAACAAAAgAAAIAgAAAIAAACAAAAgCAAAAgAAAIAAAhhGiCXmVORsBP%2B025VSO4AAAQAAAEAAABABAAAAQAAAEAQAAAEAAABAAAAQBAAAAQAAAEAAABAEAAABAAAAQAAAEAQAAAEAAABAAAAQBAAAAQAAAEAAABAEAAAAQAAAEAQAAAEAAABAAAAQBAAAAQAAAEAAABAEAAABAAAAQAAAEAQAAAEAAABAAAAQBAAAAQAAAEAAABAEAAAAQAAAEAQAAAEAAABAAAAQBAAAAQAAAEAAABAEAAABAAAAQAAAEAQAAAEAAABAAAAQBAAAAQAAAEAAABAEAAABAAAAEAQAAAEAAABAAAAQBAAAAQAAAEAAABAEAAABAAAAQAAAEAQAAAEAAABAAAAQBAAAAQAAAEAAABAEAAABAAAAEAQAAAEAAABACA8UQT9MqtGqFXmZMR%2FDRcAAAIAAACAIAAACAAAAgAAAIAgAAAIAAACAAAAgCAAAAgAAAIAIAAACAAAAgAAAIAgAAAIAAACAAAAgCAAAAgAAAIAAACAIAAACAAAAgAAAIAgAAAIAAACAAAAgCAAAAgAAAIAIAAACAAAAgAAAIAgAAAIAAACAAAAgCAAAAgAAAIAAACAIAAACAAAAgAAAIAgAAAIAAACAAAAgCAAAAgAAAIAAACACAAAAgAAAIAgAAAIAAACAAAAgCAAAAgAAAIAAACAIAAACAAAAgAAAIAgAAAIAAACAAAAgCAAAAgAAAIAAACACAAAAgAAAIAgAAAIAAACAAAAgCAAAAgAAAIAAACAIAAACAAAAgAAAIAgAAAIAAACAAAx0QTcILcqhHABQCAAAAgAAAIAAACAIAAACAAAAgAAAIAgAAAIAAACAAAAgCAAAAIAAACAIAAACAAAAgAAAIAgAAAIAAACAAAAgCAAAAgAAAIAAACAIAAACAAAAgAAAIAgAAAIAAACAAAAgCAAAAIAAACAIAAACAAAAgAAAIAgAAAIAAACAAAAgCAAAAgAAAIAAACAIAAACAAAAgAAAIAgAAAIAAACAAAAgCAAAAgAAACAIAAACAAAAgAAAIAgAAAIAAACAAAAgCAAAAgAAB817RuixUAXAAACAAAAgCAAAAgAAAIAAACAIAAACAAAAgAAAIAgAAAIAAACAAAAgCAAAAgAAAIAAACAIAAACAAAAgAAAIAIAAACAAAAgCAAAAwkhfpcxZ8jD6JTgAAAABJRU5ErkJggg%3D%3D%22%2C%22sizes%22%3A%22512x512%22%2C%22type%22%3A%22image%2Fpng%22%2C%22purpose%22%3A%22maskable%22%7D%5D%7D">
+<title>Healing Touch</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Overpass:wght@500;600;700;800;900&family=Overpass+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    /* field dressing white, olive drab structure, cross red */
+    --ink:#E7ECD6; --panel:#F7FAEC; --panel-2:#D8E1BE;
+    --line:#4B5320; --line-soft:#B2BD8C;
+    --text:#161B0C; --mute:#3B4419; --dim:#57632C; --dimmer:#7F8C5A;
+    --key:#4B5320; --key-hi:#5F6A28; --key-dim:#97A46F;
+    --key-wash:#D2DCB2;
+    --red:#C8102E; --red-hi:#E01B3C; --red-dim:#DFA9AE;
+    --red-wash:#F4DEDF;
+    --hit:#3A7A1C;
+    --on-key:#FFFFFF;
+    --on-red:#FFFFFF;
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--ink);
+    color:var(--text);
+    font-family:"Overpass",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    font-size:16.5px;line-height:1.42;font-weight:500;
+    padding:calc(14px + env(safe-area-inset-top)) 12px calc(124px + env(safe-area-inset-bottom));
+    -webkit-text-size-adjust:100%;
+  }
+  .wrap{max-width:520px;margin:0 auto;}
+
+  .cross{
+    position:relative;display:inline-block;flex:none;
+    width:30px;height:30px;background:var(--panel);
+    border:2px solid var(--line);border-radius:3px;
+  }
+  .cross::before,.cross::after{content:"";position:absolute;background:var(--red);}
+  .cross::before{left:50%;top:4px;bottom:4px;width:7px;margin-left:-3.5px;}
+  .cross::after{top:50%;left:4px;right:4px;height:7px;margin-top:-3.5px;}
+  .cross.big{width:52px;height:52px;border-width:3px;border-radius:4px;margin:0 auto 14px;display:block;}
+  .cross.big::before{top:7px;bottom:7px;width:13px;margin-left:-6.5px;}
+  .cross.big::after{left:7px;right:7px;height:13px;margin-top:-6.5px;}
+  .brand{display:flex;align-items:center;gap:10px;min-width:0;}
+
+  header{
+    display:flex;align-items:center;justify-content:space-between;gap:10px;
+    padding-bottom:11px;margin-bottom:12px;border-bottom:2px solid var(--line);
+  }
+  h1{font-weight:900;font-size:22px;letter-spacing:-.02em;margin:0;line-height:1;text-transform:uppercase;}
+  h1 span{color:var(--red);}
+  .who{
+    font-family:"Overpass Mono",monospace;font-size:11px;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--dim);text-align:right;line-height:1.35;
+  }
+
+  .tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:12px;}
+  .tabs button{
+    min-height:46px;background:var(--panel);color:var(--mute);
+    border:2px solid var(--line);border-radius:6px;cursor:pointer;
+    font-family:"Overpass Mono",monospace;font-size:11px;font-weight:700;
+    letter-spacing:.08em;text-transform:uppercase;
+  }
+  .tabs button[aria-selected=true]{background:var(--key-wash);border-color:var(--key);color:var(--text);}
+
+  .lvl{
+    display:grid;grid-template-columns:auto repeat(3,1fr);gap:6px;align-items:center;
+    border:2px solid var(--line);border-radius:6px;background:var(--panel);
+    padding:9px;margin-bottom:14px;
+  }
+  .lvl .cap{
+    font-weight:700;
+    font-family:"Overpass Mono",monospace;font-size:10.5px;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--dim);padding:0 6px 0 4px;
+  }
+  .lvl button{
+    min-height:44px;background:var(--ink);color:var(--mute);
+    border:2px solid var(--line);border-radius:5px;cursor:pointer;
+    font-family:"Overpass Mono",monospace;font-size:14px;font-weight:600;
+  }
+  .lvl button[aria-pressed=true]{background:var(--key-wash);border-color:var(--key);color:var(--text);}
+
+  .block{
+    border:2px solid var(--line);border-radius:6px;background:var(--panel);
+    margin-bottom:14px;overflow:hidden;
+  }
+  .block > h2{
+    font-family:"Overpass Mono",monospace;font-size:11.5px;font-weight:700;
+    letter-spacing:.13em;text-transform:uppercase;color:var(--red);
+    margin:0;padding:10px 12px;background:var(--panel-2);border-bottom:2px solid var(--line);
+    display:flex;justify-content:space-between;gap:8px;
+  }
+  .block > h2.v{color:var(--red);}
+  h2 .h2-side{color:var(--dim);letter-spacing:.08em;font-weight:400;}
+  .pad{padding:12px;}
+
+  .vit{display:grid;grid-template-columns:repeat(4,1fr);}
+  .vit div{
+    padding:11px 4px;text-align:center;border-right:1px solid var(--line-soft);
+    border-bottom:1px solid var(--line-soft);
+  }
+  .vit div:nth-child(4n){border-right:none;}
+  .vit div:nth-child(n+5){border-bottom:none;}
+  .vit .k{
+    display:block;font-family:"Overpass Mono",monospace;font-size:9.5px;
+    letter-spacing:.13em;text-transform:uppercase;color:var(--dim);
+  }
+  .vit .v{display:block;font-size:20px;font-weight:700;margin-top:3px;letter-spacing:-.02em;}
+
+  .econ{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;padding:12px;}
+  .slot{
+    border:2px solid var(--line);border-radius:5px;background:var(--ink);
+    padding:9px 6px;text-align:center;min-height:64px;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;
+  }
+  .slot .box{
+    width:22px;height:22px;border:1px solid var(--line);border-radius:4px;
+    display:flex;align-items:center;justify-content:center;flex:none;
+    font-size:15px;line-height:1;color:transparent;
+    font-family:"Overpass Mono",monospace;font-weight:600;
+  }
+  .slot .nm{
+    font-weight:700;
+    font-family:"Overpass Mono",monospace;font-size:10px;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--dim);
+  }
+  .slot.used{border-color:var(--key-hi);background:var(--key-wash);}
+  .slot.used .box{background:var(--key);border-color:var(--key);color:var(--on-key);}
+  .slot.used .nm{color:var(--text);}
+  .slot.over{border-color:var(--red);background:var(--red-wash);}
+  .slot.over .box{background:var(--red);border-color:var(--red);color:var(--on-red);}
+  .slot.over .nm{color:var(--red);}
+  .slot.tap{cursor:pointer;}
+  .econ-note{
+    padding:0 12px 12px;font-family:"Overpass Mono",monospace;
+    font-size:11.5px;line-height:1.6;color:var(--dim);
+  }
+  .econ-note b{color:var(--red);font-weight:800;}
+  .econ-note i{color:var(--key);font-style:normal;}
+
+  .track{display:flex;align-items:center;gap:9px;padding:12px;border-top:1px solid var(--line-soft);}
+  .track .nm{
+    font-weight:700;
+    font-family:"Overpass Mono",monospace;font-size:10.5px;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--dim);flex:1;line-height:1.35;
+  }
+  .track .nm b{
+    display:block;font-size:14px;letter-spacing:.04em;color:var(--red);
+    font-weight:800;margin-top:2px;
+  }
+  .track.drained .nm b{color:var(--dimmer);}
+  .track.over .nm b{color:var(--red);}
+  .pips{display:flex;gap:8px;flex:none;}
+  .pip{
+    width:22px;height:22px;border-radius:50%;flex:none;
+    background:var(--key);border:2px solid var(--key);
+    transition:background .15s,border-color .15s;
+  }
+  .pip.out{ background:var(--panel);border-color:var(--key-dim); }
+  .pip.tapme{cursor:pointer;}
+  .pip.insp{ background:var(--red);border-color:var(--red); }
+  .pip.insp.out{ background:var(--panel);border-color:var(--red-dim); }
+
+  .focus-tools{
+    display:flex;align-items:center;gap:7px;padding:0 12px 11px;
+  }
+  .focus-tools.rests{padding-top:2px;}
+  .focus-tools.belt{border-top:1px solid var(--line-soft);padding-top:11px;}
+  .focus-tools button{
+    flex:none;min-width:44px;min-height:40px;padding:0 12px;
+    background:var(--ink);color:var(--mute);
+    border:1px solid var(--line);border-radius:5px;cursor:pointer;
+    font-family:"Overpass Mono",monospace;font-size:12px;
+    letter-spacing:.09em;text-transform:uppercase;
+  }
+  .focus-tools.rests button{flex:1;}
+  .focus-tools button:active{border-color:var(--key);color:var(--key-hi);}
+  .focus-tools button.armed{border-color:var(--key);color:var(--key-hi);}
+  .focus-tools button:disabled{color:var(--dimmer);border-color:var(--line-soft);background:var(--panel);cursor:not-allowed;}
+  .fp-note{
+    font-weight:700;
+    flex:1;font-family:"Overpass Mono",monospace;font-size:11px;
+    letter-spacing:.06em;color:var(--dim);line-height:1.45;
+  }
+  .fp-note i{font-style:normal;color:var(--dimmer);}
+
+  .eff{border-bottom:1px solid var(--line-soft);padding:11px 12px;}
+  .eff:last-child{border-bottom:none;}
+  .eff-top{display:flex;align-items:center;gap:10px;}
+  .eff-name{flex:1;min-width:0;}
+  .eff-name b{display:block;font-weight:600;font-size:16px;}
+  .eff-name small{
+    display:block;font-family:"Overpass Mono",monospace;font-size:11px;
+    letter-spacing:.05em;color:var(--dim);margin-top:1px;
+  }
+  .sw{
+    flex:none;width:52px;height:30px;border-radius:15px;
+    border:1px solid var(--line);background:var(--ink);
+    cursor:pointer;position:relative;padding:0;transition:background .15s,border-color .15s;
+  }
+  .sw::after{
+    content:"";position:absolute;top:3px;left:3px;width:22px;height:22px;
+    border-radius:50%;background:var(--dim);transition:transform .15s,background .15s;
+  }
+  .sw[aria-pressed=true]{background:var(--key-wash);border-color:var(--key);}
+  .sw[aria-pressed=true]::after{transform:translateX(22px);background:var(--key);}
+  .sw.v[aria-pressed=true]{background:var(--red-wash);border-color:var(--red);}
+  .sw.v[aria-pressed=true]::after{background:var(--red);}
+  .eff-list{margin:9px 0 0;padding:0;list-style:none;}
+  .eff-list li{
+    font-family:"Overpass Mono",monospace;font-size:12px;line-height:1.6;
+    color:var(--dim);padding-left:15px;position:relative;
+  }
+  .eff-list li::before{content:"\2192";position:absolute;left:0;color:var(--red);}
+  .eff-list li b{color:var(--text);font-weight:600;}
+  .eff.off .eff-list li{color:var(--dimmer);}
+  .eff.off .eff-list li::before{color:var(--key-dim);}
+  .eff.off .eff-list li b{color:var(--dim);}
+  .eff.off .eff-name b{color:var(--mute);}
+
+  .choice{display:flex;gap:6px;margin-top:10px;}
+  .choice button{
+    flex:1;min-height:42px;padding:6px;background:var(--ink);color:var(--mute);
+    border:1px solid var(--line);border-radius:5px;cursor:pointer;
+    font-family:"Overpass Mono",monospace;font-size:11.5px;letter-spacing:.06em;line-height:1.35;
+  }
+  .choice button[aria-pressed=true]{background:var(--key-wash);border-color:var(--key);color:var(--text);}
+
+  .out{
+    margin-top:10px;padding:9px 11px;border-radius:5px;
+    border:1px solid var(--line);background:var(--panel-2);
+    font-family:"Overpass Mono",monospace;font-size:12px;color:var(--dim);line-height:1.5;
+  }
+  .out b{color:var(--red);font-weight:800;font-size:16px;}
+  .out b.v{color:var(--red);}
+
+  /* ---------- checks, saves and skills ---------- */
+  .sect2{
+    font-family:"Overpass Mono",monospace;font-size:11px;font-weight:700;
+    letter-spacing:.12em;text-transform:uppercase;color:var(--red);
+    padding-bottom:6px;margin:18px 0 9px;border-bottom:2px solid var(--red-dim);
+  }
+  .sect2:first-child{margin-top:0;}
+  .chkgrid{display:grid;grid-template-columns:1fr 1fr;gap:6px;}
+  .chk{
+    display:flex;align-items:center;justify-content:space-between;gap:8px;
+    min-height:48px;padding:8px 10px;text-align:left;
+    background:var(--ink);border:2px solid var(--line);border-radius:5px;cursor:pointer;
+  }
+  .chk .nm{
+    font-family:"Overpass",sans-serif;font-size:15.5px;font-weight:700;
+    color:var(--text);line-height:1.1;min-width:0;
+  }
+  .chk .nm em{
+    display:block;font-style:normal;font-family:"Overpass Mono",monospace;
+    font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--dimmer);
+  }
+  .chk .mv{
+    flex:none;font-family:"Overpass Mono",monospace;font-size:17px;font-weight:700;
+    color:var(--mute);font-variant-numeric:tabular-nums;
+  }
+  .chk.prof{border-color:var(--red);}
+  .chk.on{background:var(--key);border-color:var(--key);}
+  .chk.on .nm,.chk.on .mv{color:var(--on-key);}
+  .chk.on .nm em{color:var(--key-dim);}
+  .fx{
+    display:flex;align-items:center;gap:9px;padding:9px 11px;margin-bottom:6px;
+    border:2px solid var(--line-soft);border-radius:5px;background:var(--panel-2);
+    font-family:"Overpass Mono",monospace;
+  }
+  .fx .t{flex:1;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--mute);}
+  .fx .v{
+    flex:none;font-size:20px;font-weight:700;color:var(--text);
+    min-width:42px;text-align:right;font-variant-numeric:tabular-nums;
+  }
+  .fx.sum{border-color:var(--red);background:var(--red-wash);}
+  .fx.sum .t{color:var(--red);font-weight:700;}
+  .fx.sum .v{color:var(--red);font-size:24px;}
+  .fx.none{border-style:dashed;}
+  .fx.none .t{color:var(--dimmer);}
+
+  /* ---------- attack card ---------- */
+  .card-top{padding:9px 12px 11px;background:var(--panel-2);border-bottom:1px solid var(--line);}
+  .card-top .line{display:flex;align-items:center;gap:8px;margin-bottom:8px;}
+  .idx{
+    font-family:"Overpass Mono",monospace;font-size:11.5px;font-weight:600;
+    letter-spacing:.14em;text-transform:uppercase;color:var(--red);flex:none;
+  }
+  .kill{
+    margin-left:auto;flex:none;width:30px;height:30px;background:none;
+    border:1px solid var(--line);border-radius:4px;color:var(--dim);
+    font-size:18px;line-height:1;cursor:pointer;
+  }
+  .kill:active{background:var(--red-wash);color:var(--red);}
+  .kill.hidden{visibility:hidden;pointer-events:none;}
+  .pairnote{
+    font-family:"Overpass Mono",monospace;font-size:11px;font-weight:700;
+    letter-spacing:.06em;color:var(--key-dim);margin-top:8px;text-transform:uppercase;
+  }
+
+  /* ---------- strike picker ---------- */
+  .picker{display:grid;grid-template-columns:1fr 1fr;gap:6px;}
+  .pick{
+    display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:2px;
+    min-height:54px;padding:9px 10px;text-align:left;
+    background:var(--ink);border:2px solid var(--line);border-radius:5px;cursor:pointer;
+  }
+  .pick.wide{grid-column:1 / -1;}
+  .pick b{
+    font-family:"Overpass",sans-serif;font-size:15px;font-weight:700;
+    color:var(--text);line-height:1.15;
+  }
+  .pick i{
+    font-style:normal;font-family:"Overpass Mono",monospace;font-size:10px;font-weight:700;
+    letter-spacing:.08em;text-transform:uppercase;color:var(--dimmer);line-height:1.2;
+  }
+  .pick.on{background:var(--key);border-color:var(--key-hi);}
+  .pick.on b{color:var(--on-key);}
+  .pick.on i{color:var(--on-key);}
+  .pick:disabled{cursor:not-allowed;border-color:var(--line-soft);}
+  .pick:disabled b{color:var(--dim);}
+  .pick:disabled i{color:var(--dimmer);}
+  .pick.on:disabled{background:var(--key-dim);border-color:var(--key-dim);}
+  .pick.on:disabled b,.pick.on:disabled i{color:var(--text);}
+
+  .readout{
+    border:3px solid var(--red);border-radius:7px;background:var(--panel);
+    padding:16px 14px 13px;text-align:center;
+  }
+  .readout.crit{background:var(--red-wash);}
+  .readout.fumble{border-color:var(--key-dim);}
+  .readout .n{
+    font-weight:900;font-size:64px;line-height:.86;letter-spacing:-.04em;
+    display:block;font-variant-numeric:tabular-nums;
+  }
+  .readout .n.empty{color:var(--dim);font-size:44px;}
+  .readout .lab{
+    font-family:"Overpass Mono",monospace;font-size:11px;letter-spacing:.18em;
+    text-transform:uppercase;color:var(--red);margin-top:7px;
+  }
+  .readout .math{
+    font-family:"Overpass Mono",monospace;font-size:12px;color:var(--dim);
+    margin-top:6px;padding-top:6px;border-top:1px solid var(--line-soft);
+  }
+  .readout .math b{color:var(--text);font-weight:600;}
+
+  .card-ac{display:flex;align-items:center;gap:9px;padding:9px 0 4px;border-top:1px solid var(--line-soft);margin-top:14px;}
+  .card-ac .k{
+    font-weight:700;
+    font-family:"Overpass Mono",monospace;font-size:10.5px;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--dim);flex:none;
+  }
+  .card-ac .ac-val{
+    font-family:"Overpass Mono",monospace;font-size:19px;font-weight:600;
+    color:var(--text);min-width:28px;
+  }
+  .card-ac .verdict{
+    margin-left:auto;font-family:"Overpass Mono",monospace;font-size:12px;
+    font-weight:600;letter-spacing:.12em;text-transform:uppercase;
+  }
+  .card-ac .verdict.hit{color:var(--hit);}
+  .card-ac .verdict.miss{color:var(--dim);}
+  .card-ac .verdict.crit{color:var(--red);}
+
+  .wheel-wrap{position:relative;margin-bottom:4px;}
+  .wheel-wrap.ac{margin-bottom:10px;}
+  .wheel-wrap.ac .tick{width:44px;height:38px;font-size:15px;}
+  .wheel-wrap.ac .tick.sel{font-size:19px;}
+  .wheel-wrap.ac .wheel-frame{width:44px;height:38px;}
+  .wheel{
+    display:flex;overflow-x:auto;scroll-snap-type:x mandatory;
+    scrollbar-width:none;-ms-overflow-style:none;padding:6px 0;
+  }
+  .wheel::-webkit-scrollbar{display:none;}
+  .tick{
+    flex:none;width:52px;height:46px;scroll-snap-align:center;font-weight:700;
+    display:flex;align-items:center;justify-content:center;
+    font-family:"Overpass Mono",monospace;font-size:17px;color:var(--dim);
+    cursor:pointer;border:none;background:none;transition:color .12s,transform .12s;
+  }
+  .tick.near{color:var(--mute);font-weight:700;}
+  .tick.sel{color:var(--text);font-size:25px;font-weight:800;transform:scale(1.08);}
+  .tick.sel.hot{color:var(--red);}
+  .tick.sel.cold{color:var(--dim);}
+  .wheel-frame{
+    position:absolute;top:6px;left:50%;transform:translateX(-50%);
+    width:52px;height:46px;border:2px dashed var(--key-dim);border-radius:5px;
+    pointer-events:none;transition:border-color .15s;
+  }
+  .wheel-frame.live{border-style:solid;border-width:3px;border-color:var(--red);}
+  .fade{display:none;}
+  .wheel-cap{
+    font-weight:700;
+    font-family:"Overpass Mono",monospace;font-size:10.5px;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--key-dim);text-align:center;margin-bottom:14px;
+  }
+
+  .sect{
+    font-weight:700;
+    font-family:"Overpass Mono",monospace;font-size:10.5px;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--red);letter-spacing:.12em;
+    padding-bottom:6px;margin:16px 0 2px;border-bottom:2px solid var(--red-dim);
+  }
+  .sect.v{color:var(--red);}
+  .sect .x2{color:var(--red);display:none;}
+  .is-crit .sect .x2{display:inline;}
+
+  .row{
+    display:flex;align-items:center;gap:10px;
+    min-height:44px;padding:4px 0;border-bottom:1px solid var(--line-soft);
+  }
+  .row:last-child{border-bottom:none;}
+  .row.muted .name{color:var(--dimmer);}
+  .row.muted .name b{color:var(--dim);}
+  .row.muted .name small{color:var(--dimmer);}
+  .row .name{flex:1;font-size:15.5px;color:var(--mute);min-width:0;}
+  .row .name b{color:var(--text);font-weight:500;}
+  .row .name small{
+    display:block;font-family:"Overpass Mono",monospace;font-size:11px;
+    color:var(--dim);letter-spacing:.05em;
+  }
+  .row.harm .name b{color:var(--red);}
+
+  input[type=checkbox]{
+    appearance:none;-webkit-appearance:none;flex:none;
+    width:22px;height:22px;border:1px solid var(--line);border-radius:4px;
+    background:var(--ink);cursor:pointer;position:relative;
+  }
+  input[type=checkbox]:checked{background:var(--key);border-color:var(--key-hi);}
+  input[type=checkbox]:checked::after{
+    content:"";position:absolute;left:7px;top:3px;width:5px;height:11px;
+    border:solid var(--on-key);border-width:0 2px 2px 0;transform:rotate(42deg);
+  }
+  input[type=checkbox].v:checked{background:var(--red);border-color:var(--red);}
+  input[type=checkbox].v:checked::after{border-color:var(--on-red);}
+  input[type=checkbox]:disabled{border-color:var(--line-soft);background:var(--panel);cursor:not-allowed;}
+  input[type=number]{
+    flex:none;width:62px;padding:10px 6px;text-align:center;
+    background:var(--ink);color:var(--text);
+    border:1px solid var(--line);border-radius:5px;
+    font-family:"Overpass Mono",monospace;font-size:17px;font-weight:600;
+    -moz-appearance:textfield;
+  }
+  input[type=number]::-webkit-outer-spin-button,
+  input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none;margin:0;}
+  input:focus,select:focus,button:focus-visible{outline:2px solid var(--key);outline-offset:1px;}
+  .drop{
+    flex:none;width:30px;height:30px;background:none;
+    border:1px solid var(--line-soft);border-radius:4px;
+    color:var(--dim);font-size:16px;line-height:1;cursor:pointer;
+  }
+  .add{
+    width:100%;min-height:44px;margin-top:9px;background:none;color:var(--mute);
+    border:1px dashed var(--line);border-radius:5px;cursor:pointer;
+    font-family:"Overpass Mono",monospace;font-size:11.5px;
+    letter-spacing:.12em;text-transform:uppercase;
+  }
+  .add:active{border-color:var(--key);color:var(--key-hi);background:var(--key-wash);}
+
+  /* tappable die faces */
+  .die-row{padding:7px 0 3px;border-bottom:1px solid var(--line-soft);}
+  .die-row:last-child{border-bottom:none;}
+  .die-row.muted .name{color:var(--dimmer);}
+  .die-row.muted .name b{color:var(--dim);}
+  .die-row.muted .name small{color:var(--dimmer);}
+  .die-head{display:flex;align-items:baseline;gap:8px;margin-bottom:5px;}
+  .die-head .name{flex:1;font-size:14.5px;color:var(--mute);}
+  .die-head .name b{color:var(--text);font-weight:500;}
+  .die-head .name small{
+    display:block;font-family:"Overpass Mono",monospace;font-size:11px;
+    color:var(--dim);letter-spacing:.05em;
+  }
+  .die-row.harm .die-head .name b{color:var(--red);}
+  .die-strip{display:flex;gap:4px;align-items:center;margin-bottom:4px;}
+  .die-strip .striptag{
+    font-family:"Overpass Mono",monospace;font-size:10px;font-weight:700;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--red);flex:none;width:34px;
+  }
+  .face{
+    flex:1;min-width:0;height:42px;
+    background:var(--panel-2);color:var(--mute);
+    border:2px solid var(--line);border-radius:5px;cursor:pointer;
+    font-family:"Overpass Mono",monospace;font-size:16px;font-weight:700;
+  }
+  .face.one{color:var(--red);}
+  .face.on{background:var(--key);border-color:var(--key-hi);color:var(--on-key);font-weight:800;}
+  .face.on.one{background:var(--red);border-color:var(--red);color:var(--on-red);}
+  .face:disabled{color:var(--dimmer);border-color:var(--line-soft);background:var(--panel);cursor:not-allowed;}
+  .die-strip.crit .face.on{background:var(--red);border-color:var(--red);color:var(--on-red);}
+  .die-row.harm .face.on{background:var(--red);border-color:var(--red);color:var(--on-red);}
+
+  .note{
+    display:flex;gap:9px;margin-top:11px;padding:10px 11px;border-radius:5px;
+    font-size:14px;line-height:1.45;border:2px solid var(--key-dim);background:var(--key-wash);
+  }
+  .note.soft{border-color:var(--line);background:var(--panel-2);}
+  .note.bad{border-color:var(--red);background:var(--red-wash);}
+  .note .tag{
+    font-family:"Overpass Mono",monospace;font-size:10.5px;letter-spacing:.13em;
+    text-transform:uppercase;color:var(--red);flex:none;padding-top:2px;font-weight:700;
+  }
+  .note.soft .tag{color:var(--mute);}
+  .note.bad .tag{color:var(--red);}
+
+  .dmg-bar{
+    display:flex;align-items:baseline;justify-content:space-between;gap:10px;
+    margin-top:14px;padding:12px;border:1px solid var(--line);border-radius:5px;
+    background:var(--panel-2);
+  }
+  .dmg-bar .lab{
+    font-family:"Overpass Mono",monospace;font-size:11px;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--mute);
+  }
+  .dmg-bar .n{
+    font-weight:900;font-size:34px;line-height:1;letter-spacing:-.03em;
+    font-variant-numeric:tabular-nums;
+  }
+  .dmg-bar .n.empty{color:var(--dim);}
+  .brk-box{margin-top:7px;}
+  .brk{
+    display:flex;align-items:baseline;gap:9px;
+    padding:6px 12px;border:1px solid var(--line-soft);border-radius:5px;
+    margin-bottom:5px;font-family:"Overpass Mono",monospace;
+  }
+  .brk .t{font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute);
+          min-width:74px;flex:none;}
+  .brk .d{flex:1;font-size:12px;color:var(--dim);text-align:right;}
+  .brk .v{font-size:18px;font-weight:600;color:var(--text);min-width:34px;text-align:right;}
+  .brk.necro{border-color:var(--red-dim);}
+  .brk.necro .t,.brk.necro .v{color:var(--red);}
+
+  #addAttack{
+    width:100%;min-height:52px;margin-bottom:14px;
+    background:var(--panel);color:var(--text);
+    border:2px solid var(--key-dim);border-radius:6px;cursor:pointer;
+    font-family:"Overpass Mono",monospace;font-size:12px;font-weight:700;
+    letter-spacing:.14em;text-transform:uppercase;
+  }
+  #addAttack:active{background:var(--key-wash);}
+
+  /* turn readout */
+  .ro{border-top:1px solid var(--line-soft);padding:9px 12px;}
+  .ro-head{display:flex;align-items:baseline;gap:8px;margin-bottom:4px;}
+  .ro-head .n{
+    font-family:"Overpass Mono",monospace;font-size:11px;font-weight:600;
+    letter-spacing:.12em;text-transform:uppercase;color:var(--red);flex:none;
+  }
+  .ro-head .t{font-size:12.5px;color:var(--dim);flex:1;min-width:0;}
+  .ro-head .v{
+    font-family:"Overpass Mono",monospace;font-size:11px;font-weight:600;
+    letter-spacing:.1em;text-transform:uppercase;flex:none;
+  }
+  .ro-head .v.hit{color:var(--hit);}
+  .ro-head .v.miss{color:var(--dim);}
+  .ro-head .v.crit{color:var(--red);}
+  .ro-body{display:flex;align-items:flex-start;gap:10px;}
+  .ro-lines{flex:1;min-width:0;}
+  .ro-total{
+    flex:none;text-align:right;font-weight:900;font-size:32px;line-height:1;
+    letter-spacing:-.03em;font-variant-numeric:tabular-nums;color:var(--text);min-width:46px;
+  }
+  .ro-total.none{color:var(--dimmer);font-size:20px;}
+  .ro-line{
+    display:flex;gap:8px;font-family:"Overpass Mono",monospace;font-size:11.5px;
+    line-height:1.55;color:var(--dim);
+  }
+  .ro-line .k{flex:none;width:48px;color:var(--dimmer);}
+  .ro-line .f{flex:1;min-width:0;word-break:break-word;}
+  .ro-line .f b{color:var(--text);font-weight:600;}
+  .ro-line .f em{color:var(--red);font-style:normal;}
+  .ro-sum{
+    padding:10px 12px;border-top:1px solid var(--line);background:var(--panel-2);
+    font-family:"Overpass Mono",monospace;font-size:11.5px;color:var(--dim);line-height:1.5;
+  }
+  .ro-sum b{color:var(--text);font-weight:600;}
+  .ro-sum .big{color:var(--red);font-size:15px;font-weight:800;}
+
+  /* history */
+  .hist-tools{display:flex;gap:7px;padding:11px 12px;}
+  .hist-tools button{
+    flex:1;min-height:42px;background:var(--ink);color:var(--mute);
+    border:1px solid var(--line);border-radius:5px;cursor:pointer;
+    font-family:"Overpass Mono",monospace;font-size:11px;
+    letter-spacing:.1em;text-transform:uppercase;
+  }
+  .hist-tools button:active{border-color:var(--key);color:var(--key-hi);}
+  .hist-tools button.arm{background:var(--red);border-color:var(--red);color:var(--on-red);}
+  .ht{border-top:1px solid var(--line-soft);padding:9px 12px;}
+  .ht-head{
+    display:flex;align-items:baseline;gap:8px;margin-bottom:3px;
+    font-family:"Overpass Mono",monospace;font-size:11px;
+    letter-spacing:.1em;text-transform:uppercase;
+  }
+  .ht-head .n{color:var(--red);font-weight:700;flex:none;}
+  .ht-head .tm{color:var(--dimmer);flex:1;}
+  .ht-head .tot{color:var(--red);font-size:16px;font-weight:800;flex:none;}
+  .ht-line{font-family:"Overpass Mono",monospace;font-size:11.5px;color:var(--dim);line-height:1.55;}
+  .ht-line b{color:var(--text);font-weight:600;}
+  .hist-empty{
+    padding:4px 12px 12px;font-family:"Overpass Mono",monospace;
+    font-size:11.5px;color:var(--dimmer);
+  }
+
+  /* bottom bar */
+  .bar{
+    position:fixed;left:0;right:0;bottom:0;z-index:20;
+    background:var(--panel-2);border-top:3px solid var(--line);
+    padding:9px 12px calc(9px + env(safe-area-inset-bottom));
+  }
+  .bar[hidden]{display:none;}
+  .bar-row{display:flex;align-items:center;gap:10px;}
+  .bar-row.two{margin-top:8px;padding-top:8px;border-top:1px solid var(--line);}
+  .bar .lab{
+    font-family:"Overpass Mono",monospace;font-size:10.5px;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--mute);line-height:1.3;
+  }
+  .bar .lab small{display:block;color:var(--dim);letter-spacing:.06em;text-transform:none;font-size:11.5px;}
+  .bar .n{
+    margin-left:auto;font-weight:900;font-size:36px;line-height:1;
+    letter-spacing:-.03em;font-variant-numeric:tabular-nums;color:var(--red);
+  }
+  .bar button{
+    flex:none;min-height:44px;padding:0 13px;background:var(--panel);color:var(--mute);
+    border:2px solid var(--line);border-radius:5px;cursor:pointer;
+    font-family:"Overpass Mono",monospace;font-size:11.5px;
+    letter-spacing:.1em;text-transform:uppercase;
+  }
+  .bar button:active{border-color:var(--key);color:var(--key-hi);}
+  .bar .go{background:var(--red);border-color:var(--red);color:var(--on-red);font-weight:800;}
+  .bar .go:active{background:var(--red-hi);}
+  .bar .go:disabled{background:var(--panel);border-color:var(--line);color:var(--dim);}
+  .bar button.arm{background:var(--red);border-color:var(--red);color:var(--on-red);font-weight:800;}
+  .bar #clearRolls{font-size:11px;}
+  .bar .combat{margin-left:auto;display:flex;gap:14px;align-items:flex-end;}
+  .bar .st{display:flex;flex-direction:column;align-items:flex-end;line-height:1.1;}
+  .bar .st i{
+    font-style:normal;font-family:"Overpass Mono",monospace;font-size:10px;
+    letter-spacing:.14em;text-transform:uppercase;color:var(--dim);
+  }
+  .bar .st b{color:var(--text);font-size:18px;font-weight:600;font-variant-numeric:tabular-nums;}
+  .bar .st.best b{color:var(--red);}
+  .bar .st.fresh b{animation:pop .5s ease-out;}
+  @keyframes pop{0%{transform:scale(1);}35%{transform:scale(1.28);}100%{transform:scale(1);}}
+
+  /* gate */
+  .gate{
+    position:fixed;top:0;left:0;right:0;bottom:0;z-index:50;background:var(--ink);
+    display:flex;align-items:center;justify-content:center;
+    padding:24px calc(24px + env(safe-area-inset-left,0px));
+  }
+  .gate[hidden]{display:none;}
+  .gate-card{max-width:340px;width:100%;text-align:center;}
+  .gate-card h1{font-size:30px;margin:0 0 6px;}
+  .gate-sub{
+    font-family:"Overpass Mono",monospace;font-size:11.5px;letter-spacing:.08em;
+    color:var(--dim);margin:0 0 22px;line-height:1.5;
+  }
+  .gate-line{
+    font-family:"Overpass Mono",monospace;font-size:12px;color:var(--mute);
+    margin:0 0 22px;line-height:1.65;
+  }
+  .gate-go{
+    display:block;width:100%;min-height:52px;margin:0 0 10px;
+    background:var(--red);border:2px solid var(--red);border-radius:6px;color:var(--on-red);
+    font-family:"Overpass Mono",monospace;font-size:12.5px;font-weight:600;
+    letter-spacing:.14em;text-transform:uppercase;cursor:pointer;
+  }
+  .gate-go:active{background:var(--red-hi);}
+  .gate-alt{
+    display:block;width:100%;min-height:46px;background:none;
+    border:2px solid var(--line);border-radius:6px;color:var(--mute);
+    font-family:"Overpass Mono",monospace;font-size:11.5px;
+    letter-spacing:.12em;text-transform:uppercase;cursor:pointer;
+  }
+
+  /* character card */
+  .lede{padding:14px 12px;font-size:16.5px;line-height:1.58;color:var(--mute);}
+  .lede b{color:var(--text);font-weight:600;}
+  .lede em{color:var(--red);font-style:italic;}
+  .lede p{margin:0 0 11px;}
+  .lede p:last-child{margin-bottom:0;}
+  .kv{border-bottom:1px solid var(--line-soft);padding:10px 12px;display:flex;gap:12px;}
+  .kv:last-child{border-bottom:none;}
+  .kv .k{
+    font-weight:700;
+    flex:none;width:96px;font-family:"Overpass Mono",monospace;font-size:10.5px;
+    letter-spacing:.13em;text-transform:uppercase;color:var(--dim);padding-top:3px;
+  }
+  .kv .v{flex:1;font-size:15.5px;color:var(--text);min-width:0;}
+  .kv .v small{display:block;color:var(--dim);font-size:12px;margin-top:2px;}
+  .abil{display:grid;grid-template-columns:repeat(6,1fr);}
+  .abil div{padding:11px 2px;text-align:center;border-right:1px solid var(--line-soft);}
+  .abil div:last-child{border-right:none;}
+  .abil .k{
+    display:block;font-family:"Overpass Mono",monospace;font-size:9.5px;
+    letter-spacing:.1em;text-transform:uppercase;color:var(--dim);
+  }
+  .abil .v{display:block;font-size:19px;font-weight:700;margin-top:2px;}
+  .abil .m{display:block;font-family:"Overpass Mono",monospace;font-size:12px;color:var(--key);margin-top:1px;}
+  .abil .m.neg{color:var(--dim);}
+  .feat{padding:11px 12px;border-bottom:1px solid var(--line-soft);}
+  .feat:last-child{border-bottom:none;}
+  .feat b{display:block;font-weight:600;font-size:15.5px;}
+  .feat b .tag{
+    font-family:"Overpass Mono",monospace;font-size:10.5px;letter-spacing:.1em;
+    color:var(--red);margin-left:7px;font-weight:700;text-transform:uppercase;
+  }
+  .feat b .tag.v{color:var(--red);}
+  .feat p{margin:4px 0 0;font-size:14px;line-height:1.55;color:var(--mute);}
+  .feat.locked b{color:var(--dim);}
+  .feat.locked p{color:var(--dimmer);}
+  .feat.locked b .tag{color:var(--dimmer);}
+  .plan .step{display:flex;gap:11px;padding:11px 12px;border-bottom:1px solid var(--line-soft);}
+  .plan .step:last-child{border-bottom:none;}
+  .plan .lv{
+    flex:none;width:30px;font-family:"Overpass Mono",monospace;font-size:12px;
+    font-weight:800;color:var(--red);padding-top:2px;
+  }
+  .plan .step.done .lv{color:var(--dim);}
+  .plan .tx{flex:1;font-size:14.5px;line-height:1.55;color:var(--mute);min-width:0;}
+  .plan .tx b{color:var(--text);font-weight:600;}
+  .plan .tx .flag{
+    display:block;margin-top:4px;font-family:"Overpass Mono",monospace;
+    font-size:11.5px;line-height:1.55;color:var(--red);font-weight:700;
+  }
+  .quote{
+    padding:14px 12px;font-size:15.5px;line-height:1.6;color:var(--text);
+    font-style:italic;border-left:4px solid var(--red);margin:0;
+  }
+  [hidden]{display:none !important;}
+
+  @media (min-width:560px){
+    body{padding-left:20px;padding-right:20px;}
+    h1{font-size:24px;}
+    .readout .n{font-size:74px;}
+  }
+</style>
+</head>
+<body>
+
+<div class="gate" id="gate">
+  <div class="gate-card">
+    <span class="cross big" aria-hidden="true"></span>
+    <h1>Healing <span>Touch</span></h1>
+    <p class="gate-sub">Augustus &ldquo;Oggie&rdquo; Manowar &middot; human monk &middot; Way of Mercy</p>
+    <p class="gate-line" id="gateLine">No session on record.</p>
+    <button type="button" class="gate-go" id="gateNew">Start a new session</button>
+    <button type="button" class="gate-alt" id="gateResume">Resume</button>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <header>
+    <div class="brand"><span class="cross" aria-hidden="true"></span><h1>Healing <span>Touch</span></h1></div>
+    <div class="who">Augustus &ldquo;Oggie&rdquo; Manowar<br><span id="whoSub">Monk 1</span></div>
+  </header>
+
+  <div class="tabs" role="tablist">
+    <button type="button" id="tabRoll" role="tab" aria-selected="true">Strikes</button>
+    <button type="button" id="tabChecks" role="tab" aria-selected="false">Checks</button>
+    <button type="button" id="tabCard" role="tab" aria-selected="false">Character</button>
+  </div>
+
+  <div class="lvl" id="lvlBar">
+    <span class="cap">Level</span>
+    <button type="button" class="lvlBtn" data-l="1" aria-pressed="true">1</button>
+    <button type="button" class="lvlBtn" data-l="2" aria-pressed="false">2</button>
+    <button type="button" class="lvlBtn" data-l="3" aria-pressed="false">3</button>
+  </div>
+
+  <!-- ======================= ROLLS ======================= -->
+  <div id="paneRoll">
+
+    <div class="block">
+      <h2>Vitals</h2>
+      <div class="vit">
+        <div><span class="k">AC</span><span class="v">16</span></div>
+        <div><span class="k">Hit points</span><span class="v" id="vHP">11</span></div>
+        <div><span class="k">Speed</span><span class="v" id="vSpd">30</span></div>
+        <div><span class="k">Initiative</span><span class="v">+3</span></div>
+        <div><span class="k">To hit</span><span class="v">+5</span></div>
+        <div><span class="k">Damage</span><span class="v">+3</span></div>
+        <div><span class="k">Monk DC</span><span class="v">13</span></div>
+        <div><span class="k">Arts die</span><span class="v">d6</span></div>
+      </div>
+    </div>
+
+    <div class="block">
+      <h2>Action economy</h2>
+      <div class="econ">
+        <div class="slot" data-k="action"><span class="box">&#10003;</span><span class="nm">Action</span></div>
+        <div class="slot" data-k="bonus"><span class="box">&#10003;</span><span class="nm">Bonus</span></div>
+        <div class="slot" data-k="reaction"><span class="box">&#10003;</span><span class="nm">Reaction</span></div>
+      </div>
+      <div class="econ-note" id="econNote"></div>
+
+      <div class="track" id="focusRow" hidden>
+        <span class="nm">Focus points<b id="focusCount">&ndash;</b></span>
+        <span class="pips" id="focusPips"></span>
+      </div>
+      <div class="focus-tools" id="fpTools" hidden>
+        <button type="button" id="fpMinus" aria-label="Give back a focus point">&minus;</button>
+        <button type="button" id="fpPlus" aria-label="Spend a focus point">+</button>
+        <span class="fp-note" id="fpNote">banked 0 &middot; this turn 0</span>
+      </div>
+
+      <div class="track" id="luckRow">
+        <span class="nm">Luck points<b id="luckCount">2 of 2 left</b></span>
+        <span class="pips" id="luckPips">
+          <span class="pip tapme" data-i="0" role="button" tabindex="0" aria-label="Luck point 1"></span>
+          <span class="pip tapme" data-i="1" role="button" tabindex="0" aria-label="Luck point 2"></span>
+        </span>
+      </div>
+      <div class="track" id="inspRow">
+        <span class="nm">Heroic Inspiration<b id="inspCount">available</b></span>
+        <span class="pips" id="inspPips">
+          <span class="pip insp tapme" data-i="0" role="button" tabindex="0" aria-label="Heroic Inspiration"></span>
+        </span>
+      </div>
+
+      <div class="focus-tools rests">
+        <button type="button" id="shortRest">Short rest</button>
+        <button type="button" id="longRest">Long rest</button>
+      </div>
+      <div class="focus-tools belt" id="uncannyBar" hidden>
+        <span class="fp-note">Uncanny Metabolism<br><i id="uncannyNote">all focus back &middot; 1/long rest &middot; on initiative</i></span>
+        <button type="button" id="uncannyUse">Use</button>
+      </div>
+      <div id="uncannyRoll" hidden></div>
+    </div>
+
+    <div class="block" id="blkMoves" hidden>
+      <h2>Focus moves</h2>
+
+      <div class="eff off" id="effPD">
+        <div class="eff-top">
+          <span class="eff-name"><b>Patient Defense</b><small>bonus action</small></span>
+          <button class="sw" type="button" id="swPD" aria-pressed="false" aria-label="Toggle Patient Defense"></button>
+        </div>
+        <div class="choice" id="chPD" hidden>
+          <button type="button" data-v="free" aria-pressed="true">Free<br>Disengage</button>
+          <button type="button" data-v="focus" aria-pressed="false">1 focus<br>Disengage + Dodge</button>
+        </div>
+      </div>
+
+      <div class="eff off" id="effSW">
+        <div class="eff-top">
+          <span class="eff-name"><b>Step of the Wind</b><small>bonus action</small></span>
+          <button class="sw" type="button" id="swSW" aria-pressed="false" aria-label="Toggle Step of the Wind"></button>
+        </div>
+        <div class="choice" id="chSW" hidden>
+          <button type="button" data-v="free" aria-pressed="true">Free<br>Dash</button>
+          <button type="button" data-v="focus" aria-pressed="false">1 focus<br>Dash + Disengage, jump &times;2</button>
+        </div>
+      </div>
+
+      <div class="eff off" id="effDeflect" hidden>
+        <div class="eff-top">
+          <span class="eff-name"><b>Deflect Attacks</b><small>reaction &middot; bludgeoning, piercing or slashing only</small></span>
+          <button class="sw" type="button" id="swDeflect" aria-pressed="false" aria-label="Toggle Deflect Attacks"></button>
+        </div>
+        <div id="deflectBody" hidden>
+          <div class="sect" style="margin-top:12px;">Reduce the damage<span class="x2"></span></div>
+          <div id="deflectDie"></div>
+          <div class="out" id="deflectOut">Tap the d10 you rolled.</div>
+          <div class="choice" id="chDeflect">
+            <button type="button" data-v="soak" aria-pressed="true">Just soak it</button>
+            <button type="button" data-v="redirect" aria-pressed="false">1 focus<br>redirect the force</button>
+          </div>
+          <div id="redirectWrap" hidden>
+            <div class="sect v">Redirect &middot; two Martial Arts dice</div>
+            <div id="redirectDice"></div>
+            <div class="out" id="redirectOut"></div>
+            <div class="note soft">
+              <span class="tag">Rule</span>
+              <span>Only if you reduced it to <b>0</b>. It is a <b>Dexterity save against 13</b>, not an
+              attack roll &mdash; full damage on a failure, nothing on a success. Reach is
+              <b>5 ft</b> if the hit was melee, <b>60 ft</b> if it was ranged, and the damage is the
+              same type the attack dealt.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="block" id="blkMercy" hidden>
+      <h2 class="v">Hand of Healing</h2>
+      <div class="eff off" id="effHeal">
+        <div class="eff-top">
+          <span class="eff-name"><b>Hand of Healing</b><small>touch one creature</small></span>
+          <button class="sw" type="button" id="swHeal" aria-pressed="false" aria-label="Toggle Hand of Healing"></button>
+        </div>
+        <div id="healBody" hidden>
+          <div class="choice" id="chHeal">
+            <button type="button" data-v="action" aria-pressed="true">Magic action<br>1 focus</button>
+            <button type="button" data-v="flurry" aria-pressed="false">Swap a Flurry strike<br>free</button>
+          </div>
+          <div class="sect">Martial Arts die</div>
+          <div id="healDie"></div>
+          <div class="out" id="healOut">Tap the d6 you rolled.</div>
+        </div>
+      </div>
+    </div>
+
+    <div id="attacks"></div>
+    <button id="addAttack" type="button">+ Add a strike</button>
+
+    <div class="block">
+      <h2>Roll history <span class="h2-side" id="histCount">0 turns</span></h2>
+      <div class="hist-tools">
+        <button type="button" id="histToggle">Show history</button>
+        <button type="button" id="sessionReset">Reset session</button>
+      </div>
+      <div id="hist" hidden></div>
+    </div>
+
+    <div class="block">
+      <h2>Turn readout</h2>
+      <div id="readout"></div>
+      <div class="ro-sum" id="roSum">nothing rolled yet</div>
+    </div>
+  </div>
+
+  <!-- ======================= CHECKS ======================= -->
+  <div id="paneChecks" hidden>
+
+    <div class="block">
+      <h2>What are you rolling? <span class="h2-side" id="ckPicked">nothing picked</span></h2>
+      <div class="pad">
+        <div class="sect2">Saving throws</div>
+        <div class="chkgrid" id="grpSaves"></div>
+        <div class="sect2">Ability checks</div>
+        <div class="chkgrid" id="grpAbil"></div>
+        <div class="sect2">Skills</div>
+        <div class="chkgrid" id="grpSkills"></div>
+        <div class="sect2">Tools</div>
+        <div class="chkgrid" id="grpTools"></div>
+      </div>
+    </div>
+
+    <div class="block" id="ckRollBlock">
+      <h2>The roll</h2>
+      <div class="pad">
+        <div class="card-ac">
+          <span class="k">DC</span><span class="ac-val" id="ckDCval">&ndash;</span>
+          <span class="verdict" id="ckVerdict"></span>
+        </div>
+        <div id="ckDCwheel"></div>
+        <div class="wheel-cap">swipe to the DC the DM called</div>
+
+        <div class="readout">
+          <span class="n empty" id="ckTotal">&ndash;</span>
+          <div class="lab" id="ckLab">Total</div>
+          <div class="math" id="ckMath">Pick a check above, then the d20 face you rolled</div>
+        </div>
+        <div id="ckD20wheel"></div>
+        <div class="wheel-cap">swipe to the number you rolled</div>
+
+        <div class="sect">The formula</div>
+        <div id="ckFormula"></div>
+
+        <div class="note soft">
+          <span class="tag">Rule</span>
+          <span>A natural 20 is only automatic on an <b>attack roll</b>. On a check or a save it
+          is just a 20 &mdash; add the modifier and compare to the DC like any other roll. Same
+          for a natural 1.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================= CHARACTER ======================= -->
+  <div id="paneCard" hidden>
+
+    <div class="block">
+      <h2>Who he is</h2>
+      <div class="lede">
+        <p><b>Augustus Manowar</b> answers to Oggie and has since his first muster. Human, mid-thirties, built like a man who spent a decade carrying other men. He was a company medic in the fighting at <b>Elturel</b> &mdash; not a soldier who learned first aid, a medic who learned soldiering because the alternative was standing there watching.</p>
+        <p>When Elturel was pulled down into Avernus, Oggie worked the streets under a burning sky for as long as the city hung there, hauling the wounded out of collapsed houses while devils walked past him picking souls off the dying. He got a great many people home. He is exact about the number he didn't.</p>
+        <p>He mustered out the season after the city came back and went looking for somewhere quiet. He found <b>Ilmater</b>, the Crying God, and a small house of his monks who taught the Way of Mercy. He came for the healing. What he found was that the discipline has two hands: one that closes a wound and one that opens one, trained by the same drills and thrown with the same body. Nobody there pretended otherwise. That honesty is why he stayed.</p>
+        <p>Now he walks. He does not go looking for a fight. But some fights need having, and he has <em>two legs, two fists, two knees, and two elbows</em> ready when one does.</p>
+      </div>
+    </div>
+
+    <div class="block">
+      <h2>At a glance</h2>
+      <div class="kv"><span class="k">Class</span><span class="v" id="cClass">Monk 1</span></div>
+      <div class="kv"><span class="k">Species</span><span class="v">Human &middot; Medium &middot; 30 ft</span></div>
+      <div class="kv"><span class="k">Background</span><span class="v">Combat Medic <small>custom &mdash; Medicine, Survival, Herbalism Kit</small></span></div>
+      <div class="kv"><span class="k">Subclass</span><span class="v" id="cSub">None yet <small>Warrior of Mercy at level 3</small></span></div>
+      <div class="kv"><span class="k">Faith</span><span class="v">Ilmater, the Crying God</span></div>
+      <div class="kv"><span class="k">Faction</span><span class="v">Order of the Gauntlet</span></div>
+      <div class="kv"><span class="k">Alignment</span><span class="v">Lawful Good</span></div>
+    </div>
+
+    <div class="block">
+      <h2>Abilities</h2>
+      <div class="abil">
+        <div><span class="k">Str</span><span class="v">8</span><span class="m neg">&minus;1</span></div>
+        <div><span class="k">Dex</span><span class="v">16</span><span class="m">+3</span></div>
+        <div><span class="k">Con</span><span class="v">16</span><span class="m">+3</span></div>
+        <div><span class="k">Int</span><span class="v">8</span><span class="m neg">&minus;1</span></div>
+        <div><span class="k">Wis</span><span class="v">16</span><span class="m">+3</span></div>
+        <div><span class="k">Cha</span><span class="v">8</span><span class="m neg">&minus;1</span></div>
+      </div>
+      <div class="kv"><span class="k">Saves</span><span class="v">Strength +1, Dexterity +5</span></div>
+      <div class="kv"><span class="k">Skills</span><span class="v" id="cSkills">Acrobatics +5, History +1, Medicine +5, Stealth +5, Survival +5</span></div>
+      <div class="kv"><span class="k">Monk DC</span><span class="v">13 <small>8 + Wisdom + proficiency &mdash; Deflect redirect, and Stunning Strike from level 5</small></span></div>
+      <div class="kv"><span class="k">Grapple DC</span><span class="v">13 <small>8 + Dexterity + proficiency &mdash; a different number that happens to match right now</small></span></div>
+      <div class="kv"><span class="k">Passive Wis</span><span class="v">13 <small>no Perception proficiency</small></span></div>
+      <div class="kv"><span class="k">Tools</span><span class="v">Weaver's Tools, Herbalism Kit</span></div>
+    </div>
+
+    <div class="block">
+      <h2>What he can do</h2>
+      <div id="featList"></div>
+    </div>
+
+    <div class="block">
+      <h2>Carried</h2>
+      <div class="kv"><span class="k">Weapons</span><span class="v">Spear, 5 daggers <small>and the hands, which are the actual weapon</small></span></div>
+      <div class="kv"><span class="k">Kit</span><span class="v">Herbalism Kit, Healer's Kit (10 uses), Explorer's Pack, Weaver's Tools</span></div>
+      <div class="kv"><span class="k">Coin</span><span class="v">1 gp</span></div>
+      <div class="kv"><span class="k">Magic items</span><span class="v">None <small>Tier 1 starts empty</small></span></div>
+    </div>
+
+    <div class="block">
+      <h2>How he carries it</h2>
+      <p class="quote">&ldquo;I ask a man his name before I set the bone, and I keep it after. There are four hundred and six names.&rdquo;</p>
+      <div class="kv"><span class="k">Ideal</span><span class="v">Mercy. The same two hands do both jobs. Which one opens is a choice, and he makes it slowly.</span></div>
+      <div class="kv"><span class="k">Bond</span><span class="v">Elturel came back. Not everyone in it did. He keeps the list, and he reads it.</span></div>
+      <div class="kv"><span class="k">Flaw</span><span class="v">He never starts a fight &mdash; which has more than once meant letting one start on somebody smaller than him.</span></div>
+    </div>
+
+    <div class="block">
+      <h2>The road to 6</h2>
+      <div class="plan" id="planList"></div>
+    </div>
+  </div>
+</div>
+
+<div class="bar" id="turnBar">
+  <div class="bar-row">
+    <div class="lab">This turn<small id="runs">nothing yet</small></div>
+    <span class="n" id="turnTotal">0</span>
+  </div>
+  <div class="bar-row two">
+    <button type="button" class="go" id="commit">Commit turn</button>
+    <button type="button" id="clearRolls">Reset turn</button>
+    <button type="button" id="discard">Discard</button>
+    <span class="combat">
+      <span class="st"><i>last</i><b id="lastTurn">&ndash;</b></span>
+      <span class="st best" id="bestWrap"><i>best</i><b id="bestTurn">&ndash;</b></span>
+    </span>
+  </div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var $ = function(id){ return document.getElementById(id); };
+  function el(tag, cls, html){
+    var n = document.createElement(tag);
+    if(cls) n.className = cls;
+    if(html !== undefined) n.innerHTML = html;
+    return n;
+  }
+  function esc(t){
+    return String(t).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+  }
+
+  /* ================= character constants ================= */
+  var DEX = 3, WIS = 3, PROF = 2, MONK_DC = 13, MA_DIE = 6;
+
+  var LEVELS = {
+    1: { hp:11, focus:0, speed:30, deflect:false, mercy:false, uncanny:false },
+    2: { hp:19, focus:2, speed:40, deflect:false, mercy:false, uncanny:true  },
+    3: { hp:27, focus:3, speed:40, deflect:true,  mercy:true,  uncanny:true  }
+  };
+
+  var UNSET = "";
+  // kind drives damage type and which extras apply
+  //   unarmed - Tavern Brawler reroll and push, Hand of Harm
+  //   weapon  - spear or dagger: monk weapon, Martial Arts die, no Brawler, no Harm
+  var CFG = {
+    "act_unarmed": { label:"Attack action \u2014 Unarmed Strike", short:"Unarmed Strike", sub:"Attack action",
+                     kind:"unarmed", type:"bludgeoning", paired:false, minLvl:1 },
+    "act_spear":   { label:"Attack action \u2014 Spear", short:"Spear", sub:"Attack action",
+                     kind:"weapon",  type:"piercing",    paired:false, minLvl:1 },
+    "act_dagger":  { label:"Attack action \u2014 Dagger", short:"Dagger", sub:"Attack action \u00b7 20/60",
+                     kind:"weapon",  type:"piercing",    paired:false, minLvl:1 },
+    "bonus_ma":    { label:"Bonus action \u2014 Unarmed Strike", short:"Unarmed Strike", sub:"Bonus action \u00b7 free",
+                     kind:"unarmed", type:"bludgeoning", paired:false, minLvl:1 },
+    "flurry":      { label:"Flurry of Blows \u2014 2 strikes", short:"Flurry of Blows", sub:"Bonus action \u00b7 1 focus \u00b7 2 strikes",
+                     kind:"unarmed", type:"bludgeoning", paired:true,  minLvl:2, wide:true }
+  };
+  function cfg(t){ return CFG[t] || { kind:"unarmed", type:"bludgeoning", paired:false }; }
+  function isAction(t){ return t === "act_unarmed" || t === "act_spear" || t === "act_dagger"; }
+
+  var ATK_MODS = [["Dexterity", DEX],["Proficiency", PROF]];
+  var DMG_MODS = [["Dexterity", DEX]];
+
+  var G = {
+    level:1,
+    pd:false, pdMode:"free",
+    sw:false, swMode:"free",
+    deflect:false, deflectMode:"soak",
+    heal:false, healMode:"action",
+    reaction:false
+  };
+
+  var bankedFocus = 0;
+  var uncannyUsed = false;
+  var luck = [false,false];
+  var inspUsed = false;
+  var history = [];
+  var lastTurn = null, bestTurn = null;
+  var sessionDay = null;
+
+  var host = $("attacks");
+  var cards = [];
+  var seq = 0, groupSeq = 0;
+
+  function today(){
+    var d = new Date();
+    return d.getFullYear() + "-" + ("0"+(d.getMonth()+1)).slice(-2) + "-" + ("0"+d.getDate()).slice(-2);
+  }
+  function clockNow(){
+    var d = new Date();
+    return ("0"+d.getHours()).slice(-2) + ":" + ("0"+d.getMinutes()).slice(-2);
+  }
+
+  /* ================= tappable die strip ================= */
+  function makeStrip(faces, opts){
+    opts = opts || {};
+    var s = el("div","die-strip" + (opts.crit ? " crit" : ""));
+    var store = { value:null, node:s, buttons:[] };
+    if(opts.crit) s.appendChild(el("span","striptag","crit"));
+    for(var i = 1; i <= faces; i++){
+      (function(v){
+        var b = el("button","face", String(v));
+        b.type = "button";
+        b.setAttribute("aria-label", (opts.label || "die") + " rolled " + v);
+        b.addEventListener("click", function(){
+          store.value = (store.value === v) ? null : v;
+          refreshAll();
+        });
+        store.buttons.push(b);
+        s.appendChild(b);
+      })(i);
+    }
+    store.paint = function(disabled){
+      store.buttons.forEach(function(b, idx){
+        var v = idx + 1;
+        b.className = "face" + (store.value === v ? " on" : "") +
+                      (v === 1 && opts.markOne ? " one" : "");
+        b.disabled = !!disabled;
+      });
+    };
+    store.paint(false);
+    return store;
+  }
+
+  function stripPanel(mount, faces, opts){
+    var wrap = el("div","die-row" + (opts && opts.harm ? " harm" : ""));
+    var st = makeStrip(faces, opts || {});
+    wrap.appendChild(st.node);
+    mount.innerHTML = "";
+    mount.appendChild(wrap);
+    return st;
+  }
+
+
+  /* ================= reusable wheel ================= */
+  function makeWheel(mount, min, max, w, onPick, label){
+    var wrap = el("div","wheel-wrap" + (w === 44 ? " ac" : ""));
+    var wheel = el("div","wheel");
+    wheel.setAttribute("role","listbox");
+    wheel.setAttribute("aria-label", label || "value");
+    for(var v = min; v <= max; v++){
+      var t = el("button","tick", String(v));
+      t.type = "button"; t.dataset.v = v; t.setAttribute("role","option");
+      wheel.appendChild(t);
+    }
+    wrap.appendChild(wheel);
+    var frame = el("div","wheel-frame");
+    wrap.appendChild(frame);
+    mount.appendChild(wrap);
+
+    var val = null, lock = false, timer = null;
+    function repad(){
+      var cw = wheel.clientWidth; if(!cw) return;
+      var side = Math.max(0, (cw - w) / 2);
+      wheel.style.paddingLeft = side + "px";
+      wheel.style.paddingRight = side + "px";
+      center(val === null ? Math.round((min + max) / 2) : val, "auto");
+    }
+    function center(v, behavior){
+      var t = wheel.querySelector('.tick[data-v="' + v + '"]'); if(!t) return;
+      lock = true;
+      var left = t.offsetLeft - wheel.clientWidth / 2 + w / 2;
+      if(wheel.scrollTo) wheel.scrollTo({ left:left, behavior:behavior || "smooth" });
+      else wheel.scrollLeft = left;
+      setTimeout(function(){ lock = false; }, 260);
+    }
+    function nearest(){
+      var mid = wheel.scrollLeft + wheel.clientWidth / 2, best = null, bd = Infinity;
+      Array.prototype.forEach.call(wheel.children, function(t){
+        var dd = Math.abs(t.offsetLeft + w / 2 - mid);
+        if(dd < bd){ bd = dd; best = t; }
+      });
+      return best;
+    }
+    function paint(){
+      Array.prototype.forEach.call(wheel.children, function(t){
+        var v = parseInt(t.dataset.v,10);
+        t.className = "tick" + (v === val ? " sel" + (v === max && max === 20 ? " hot" : "") : "") +
+          (val !== null && Math.abs(v - val) === 1 ? " near" : "");
+        t.setAttribute("aria-selected", v === val ? "true" : "false");
+      });
+      frame.className = "wheel-frame" + (val === null ? "" : " live");
+    }
+    function pick(v){ val = v; paint(); if(onPick) onPick(v); }
+    wheel.addEventListener("scroll", function(){
+      if(lock) return;
+      clearTimeout(timer);
+      timer = setTimeout(function(){
+        var t = nearest(); if(!t) return;
+        var v = parseInt(t.dataset.v,10);
+        if(v !== val) pick(v);
+      }, 90);
+    }, { passive:true });
+    wheel.addEventListener("click", function(e){
+      var t = e.target.closest(".tick"); if(!t) return;
+      var v = parseInt(t.dataset.v,10);
+      center(v); pick(v);
+    });
+    window.addEventListener("resize", repad);
+    repad(); paint();
+    return { get:function(){ return val; }, repad:repad };
+  }
+
+  /* ================= standalone dice (deflect, heal, uncanny) ================= */
+  var deflectStrip = stripPanel($("deflectDie"), 10, { label:"Deflect d10" });
+  var redirectA = null, redirectB = null;
+  (function(){
+    var w = el("div","die-row harm");
+    redirectA = makeStrip(MA_DIE, { label:"Redirect die 1", markOne:true });
+    redirectB = makeStrip(MA_DIE, { label:"Redirect die 2", markOne:true });
+    w.appendChild(redirectA.node); w.appendChild(redirectB.node);
+    $("redirectDice").appendChild(w);
+  })();
+  var healStrip = stripPanel($("healDie"), MA_DIE, { label:"Hand of Healing die", markOne:true });
+  var uncannyStrip = null;
+  (function(){
+    var w = el("div","die-row");
+    w.appendChild(el("div","die-head",'<span class="name"><b>Healing die</b><small>d6 + your monk level</small></span>'));
+    uncannyStrip = makeStrip(MA_DIE, { label:"Uncanny die" });
+    w.appendChild(uncannyStrip.node);
+    var out = el("div","out");
+    out.id = "uncannyOut";
+    out.innerHTML = "Tap the d6 you rolled.";
+    w.appendChild(out);
+    var box = el("div","pad");
+    box.style.paddingTop = "0";
+    box.appendChild(w);
+    $("uncannyRoll").appendChild(box);
+  })();
+
+  /* ================= modifier rows ================= */
+  function modRow(name, value, on, editable){
+    var row = el("label","row");
+    var cb = el("input"); cb.type = "checkbox"; cb.checked = on;
+    var nm = el("span","name");
+    if(editable){ nm.contentEditable = "true"; nm.spellcheck = false; }
+    nm.textContent = name;
+    var val = el("input"); val.type = "number"; val.value = value; val.inputMode = "numeric";
+    row.appendChild(cb); row.appendChild(nm); row.appendChild(val);
+    cb.addEventListener("change", refreshAll);
+    val.addEventListener("input", refreshAll);
+    val.addEventListener("click", function(e){ e.preventDefault(); e.stopPropagation(); });
+    if(editable) nm.addEventListener("click", function(e){ e.preventDefault(); });
+    return row;
+  }
+  function sumMods(box){
+    var total = 0, parts = [];
+    Array.prototype.forEach.call(box.children, function(row){
+      var cb = row.querySelector("input[type=checkbox]");
+      if(!cb || cb.disabled) return;
+      var v = parseInt(row.querySelector("input[type=number]").value, 10);
+      if(cb.checked && !isNaN(v) && v !== 0){
+        total += v;
+        parts.push(row.querySelector(".name").textContent.trim() +
+                   (v > 0 ? " +" : " \u2212") + Math.abs(v));
+      }
+    });
+    return { total:total, parts:parts };
+  }
+
+  /* ================= switches and choices ================= */
+  var SW = {
+    pd:      ["swPD","effPD","chPD"],
+    sw:      ["swSW","effSW","chSW"],
+    deflect: ["swDeflect","effDeflect","deflectBody"],
+    heal:    ["swHeal","effHeal","healBody"]
+  };
+  function setSwitch(key, on){
+    G[key] = on;
+    var m = SW[key];
+    $(m[0]).setAttribute("aria-pressed", on ? "true" : "false");
+    $(m[1]).className = "eff" + (on ? "" : " off");
+    $(m[2]).hidden = !on;
+    if(!on){
+      if(key === "deflect"){ deflectStrip.value = null; redirectA.value = null; redirectB.value = null; }
+      if(key === "heal"){ healStrip.value = null; }
+    }
+  }
+  Object.keys(SW).forEach(function(key){
+    $(SW[key][0]).addEventListener("click", function(){
+      setSwitch(key, !G[key]);
+      refreshAll();
+    });
+  });
+  function bindChoice(wrapId, key, after){
+    $(wrapId).addEventListener("click", function(e){
+      var b = e.target.closest("button"); if(!b) return;
+      G[key] = b.dataset.v;
+      Array.prototype.forEach.call(this.children, function(c){
+        c.setAttribute("aria-pressed", c === b ? "true" : "false");
+      });
+      if(after) after();
+      refreshAll();
+    });
+  }
+  bindChoice("chPD","pdMode");
+  bindChoice("chSW","swMode");
+  bindChoice("chDeflect","deflectMode", function(){
+    $("redirectWrap").hidden = G.deflectMode !== "redirect";
+    if(G.deflectMode !== "redirect"){ redirectA.value = null; redirectB.value = null; }
+  });
+  bindChoice("chHeal","healMode");
+
+  /* ================= reaction slot ================= */
+  var reactionSlot = document.querySelector('.slot[data-k="reaction"]');
+  reactionSlot.classList.add("tap");
+  reactionSlot.setAttribute("role","button");
+  reactionSlot.tabIndex = 0;
+  function toggleReaction(){ G.reaction = !G.reaction; refreshAll(); }
+  reactionSlot.addEventListener("click", toggleReaction);
+  reactionSlot.addEventListener("keydown", function(e){
+    if(e.key === "Enter" || e.key === " "){ e.preventDefault(); toggleReaction(); }
+  });
+
+  /* ================= luck and inspiration ================= */
+  $("luckPips").addEventListener("click", function(e){
+    var p = e.target.closest(".pip"); if(!p) return;
+    var i = parseInt(p.dataset.i,10);
+    luck[i] = !luck[i];
+    refreshAll();
+  });
+  $("luckPips").addEventListener("keydown", function(e){
+    if(e.key !== "Enter" && e.key !== " ") return;
+    var p = e.target.closest(".pip"); if(!p) return;
+    e.preventDefault();
+    var i = parseInt(p.dataset.i,10);
+    luck[i] = !luck[i];
+    refreshAll();
+  });
+  function toggleInsp(){ inspUsed = !inspUsed; refreshAll(); }
+  $("inspPips").addEventListener("click", function(e){
+    if(e.target.closest(".pip")) toggleInsp();
+  });
+  $("inspPips").addEventListener("keydown", function(e){
+    if((e.key === "Enter" || e.key === " ") && e.target.closest(".pip")){ e.preventDefault(); toggleInsp(); }
+  });
+
+  /* ================= focus tools ================= */
+  $("fpMinus").addEventListener("click", function(){
+    if(bankedFocus > 0) bankedFocus--;
+    refreshAll();
+  });
+  $("fpPlus").addEventListener("click", function(){
+    bankedFocus++;
+    refreshAll();
+  });
+  $("shortRest").addEventListener("click", function(){
+    bankedFocus = 0;                 // focus comes back; Uncanny, Luck and Inspiration do not
+    refreshAll();
+  });
+  $("longRest").addEventListener("click", function(){
+    bankedFocus = 0;
+    uncannyUsed = false;
+    luck = [false,false];
+    inspUsed = false;
+    lastTurn = null; bestTurn = null;
+    uncannyStrip.value = null;
+    refreshAll();
+  });
+  $("uncannyUse").addEventListener("click", function(){
+    if(uncannyUsed) return;
+    bankedFocus = 0;
+    uncannyUsed = true;
+    refreshAll();
+  });
+
+  /* ================= attack card ================= */
+  function makeCard(after){
+    var state = { face:null, acVal:null, type:UNSET };
+    seq++;
+
+    var card = el("div","block");
+    card.groupId = null;
+    card.part = null;
+
+    var top = el("div","card-top");
+    var line = el("div","line");
+    var idx = el("span","idx","Strike");
+    var kill = el("button","kill","\u00d7");
+    kill.type = "button"; kill.setAttribute("aria-label","Remove this strike");
+    line.appendChild(idx); line.appendChild(kill);
+    top.appendChild(line);
+
+    var picker = el("div","picker");
+    picker.setAttribute("role","group");
+    picker.setAttribute("aria-label","Strike type");
+    top.appendChild(picker);
+    var pairNote = el("div","pairnote");
+    top.appendChild(pairNote);
+    card.appendChild(top);
+
+    var typeLocked = false;
+    function paintPicker(){
+      Array.prototype.forEach.call(picker.children, function(b){
+        var on = b.dataset.t === state.type;
+        b.setAttribute("aria-pressed", on ? "true" : "false");
+        b.className = "pick" + (on ? " on" : "") + (CFG[b.dataset.t].wide ? " wide" : "");
+        b.disabled = typeLocked;
+      });
+      picker.className = "picker" + (state.type ? "" : " unset");
+    }
+    function rebuildTypes(){
+      picker.innerHTML = "";
+      var ok = false;
+      Object.keys(CFG).forEach(function(k){
+        if(CFG[k].minLvl > G.level) return;
+        if(k === state.type) ok = true;
+        var b = el("button","pick");
+        b.type = "button";
+        b.dataset.t = k;
+        b.innerHTML = "<b>" + CFG[k].short + "</b><i>" + CFG[k].sub + "</i>";
+        b.addEventListener("click", function(){
+          if(typeLocked) return;
+          state.type = (state.type === k) ? UNSET : k;
+          paintPicker();
+          onTypeChange(card);
+        });
+        picker.appendChild(b);
+      });
+      if(!ok) state.type = UNSET;
+      paintPicker();
+    }
+    rebuildTypes();
+
+    var pad = el("div","pad");
+    card.appendChild(pad);
+
+    var readout = el("div","readout");
+    var bigN = el("span","n empty","\u2013");
+    readout.appendChild(bigN);
+    readout.appendChild(el("div","lab","Total to hit"));
+    var math = el("div","math","Pick the d20 face you rolled");
+    readout.appendChild(math);
+    pad.appendChild(readout);
+
+    /* target AC */
+    var acRow = el("div","card-ac");
+    acRow.appendChild(el("span","k","Target AC"));
+    var acShow = el("span","ac-val","\u2013");
+    var acVerdict = el("span","verdict");
+    acRow.appendChild(acShow); acRow.appendChild(acVerdict);
+    pad.appendChild(acRow);
+
+    var acWrap = el("div","wheel-wrap ac");
+    var acWheel = el("div","wheel");
+    acWheel.setAttribute("role","listbox");
+    acWheel.setAttribute("aria-label","Target armor class");
+    for(var av = 5; av <= 25; av++){
+      var at = el("button","tick", String(av));
+      at.type = "button"; at.dataset.v = av; at.setAttribute("role","option");
+      acWheel.appendChild(at);
+    }
+    acWrap.appendChild(acWheel);
+    var acFrame = el("div","wheel-frame");
+    acWrap.appendChild(acFrame);
+    acWrap.appendChild(el("div","fade l"));
+    acWrap.appendChild(el("div","fade r"));
+    pad.appendChild(acWrap);
+
+    /* d20 */
+    var ww = el("div","wheel-wrap");
+    var wheel = el("div","wheel");
+    wheel.setAttribute("role","listbox");
+    wheel.setAttribute("aria-label","d20 face");
+    for(var i = 1; i <= 20; i++){
+      var t = el("button","tick", String(i));
+      t.type = "button"; t.dataset.v = i; t.setAttribute("role","option");
+      wheel.appendChild(t);
+    }
+    ww.appendChild(wheel);
+    var frame = el("div","wheel-frame");
+    ww.appendChild(frame);
+    ww.appendChild(el("div","fade l"));
+    ww.appendChild(el("div","fade r"));
+    pad.appendChild(ww);
+    pad.appendChild(el("div","wheel-cap","swipe to the number you rolled"));
+
+    var attackNote = el("div");
+    pad.appendChild(attackNote);
+
+    /* on a hit */
+    pad.appendChild(el("div","sect","On a hit"));
+    var onHit = el("div");
+    pad.appendChild(onHit);
+
+    var harmWrap = el("label","row harm");
+    var harmChk = el("input"); harmChk.type = "checkbox"; harmChk.className = "v";
+    harmWrap.appendChild(harmChk);
+    harmWrap.appendChild(el("span","name",
+      "<b>Hand of Harm</b><small>1 focus \u00b7 once per turn \u00b7 unarmed only</small>"));
+    harmChk.addEventListener("change", refreshAll);
+    onHit.appendChild(harmWrap);
+
+    var pushWrap = el("label","row");
+    var pushChk = el("input"); pushChk.type = "checkbox";
+    pushWrap.appendChild(pushChk);
+    pushWrap.appendChild(el("span","name",
+      "<b>Tavern Brawler push</b><small>5 ft \u00b7 once per turn \u00b7 Large or smaller</small>"));
+    pushChk.addEventListener("change", refreshAll);
+    onHit.appendChild(pushWrap);
+
+    /* attack modifiers */
+    pad.appendChild(el("div","sect","Attack modifiers"));
+    var atkBox = el("div");
+    ATK_MODS.forEach(function(m){ atkBox.appendChild(modRow(m[0],m[1],true,false)); });
+    pad.appendChild(atkBox);
+    var addAtkMod = el("button","add","+ add modifier");
+    addAtkMod.type = "button";
+    addAtkMod.addEventListener("click", function(){
+      var r = modRow("Situational",0,true,true);
+      atkBox.appendChild(r); refreshAll();
+    });
+    pad.appendChild(addAtkMod);
+
+    /* damage dice */
+    pad.appendChild(el("div","sect",
+      "Damage dice<span class=\"x2\"> \u00b7 roll every die again</span>"));
+    var diceBox = el("div");
+    pad.appendChild(diceBox);
+
+    var dieRows = [];
+    function dieRow(label, sub, opts){
+      opts = opts || {};
+      var row = el("div","die-row" + (opts.harm ? " harm" : ""));
+      var head = el("div","die-head");
+      head.innerHTML = '<span class="name"><b>' + label + '</b>' +
+                       (sub ? '<small>' + sub + '</small>' : '') + '</span>';
+      row.appendChild(head);
+      var entry = { row:row, harm:!!opts.harm, extra:!!opts.removable };
+      if(opts.removable){
+        var x = el("button","drop","\u00d7"); x.type = "button";
+        x.setAttribute("aria-label","Remove this damage roll");
+        x.addEventListener("click", function(){
+          dieRows = dieRows.filter(function(e){ return e !== entry; });
+          row.remove(); refreshAll();
+        });
+        head.appendChild(x);
+      }
+      entry.main = makeStrip(MA_DIE, { label:label, markOne:!opts.harm });
+      entry.crit = makeStrip(MA_DIE, { label:label + " critical", markOne:!opts.harm, crit:true });
+      row.appendChild(entry.main.node);
+      row.appendChild(entry.crit.node);
+      dieRows.push(entry);
+      return row;
+    }
+    diceBox.appendChild(dieRow("Martial Arts die","d6 \u00b7 Tavern Brawler rerolls a 1"));
+    diceBox.appendChild(dieRow("Hand of Harm","d6 necrotic \u00b7 no reroll", { harm:true }));
+
+    var addDie = el("button","add","+ add another roll");
+    addDie.type = "button";
+    addDie.addEventListener("click", function(){
+      diceBox.appendChild(dieRow("Extra die","d6", { removable:true }));
+      refreshAll();
+    });
+    pad.appendChild(addDie);
+
+    var dmgNote = el("div");
+    pad.appendChild(dmgNote);
+
+    /* damage modifiers */
+    pad.appendChild(el("div","sect","Damage modifiers"));
+    var dmgBox = el("div");
+    DMG_MODS.forEach(function(m){ dmgBox.appendChild(modRow(m[0],m[1],true,false)); });
+    pad.appendChild(dmgBox);
+    var addDmgMod = el("button","add","+ add modifier");
+    addDmgMod.type = "button";
+    addDmgMod.addEventListener("click", function(){
+      var r = modRow("Situational",0,true,true);
+      dmgBox.appendChild(r); refreshAll();
+    });
+    pad.appendChild(addDmgMod);
+
+    var dmgBar = el("div","dmg-bar");
+    var dmgLab = el("span","lab","Damage");
+    var dmgN = el("span","n empty","\u2013");
+    dmgBar.appendChild(dmgLab); dmgBar.appendChild(dmgN);
+    pad.appendChild(dmgBar);
+    var breakdown = el("div","brk-box");
+    pad.appendChild(breakdown);
+
+    /* ---- AC wheel ---- */
+    var acLock = false, acTimer = null, AW = 44;
+    function acPad(){
+      var w = acWheel.clientWidth; if(!w) return;
+      var side = Math.max(0, (w - AW) / 2);
+      acWheel.style.paddingLeft = side + "px";
+      acWheel.style.paddingRight = side + "px";
+      acCenter(state.acVal === null ? 13 : state.acVal, "auto");
+    }
+    function acCenter(v, behavior){
+      var t = acWheel.querySelector('.tick[data-v="' + v + '"]'); if(!t) return;
+      acLock = true;
+      var left = t.offsetLeft - acWheel.clientWidth / 2 + AW / 2;
+      if(acWheel.scrollTo) acWheel.scrollTo({ left:left, behavior:behavior || "smooth" });
+      else acWheel.scrollLeft = left;
+      setTimeout(function(){ acLock = false; }, 260);
+    }
+    function acNearest(){
+      var mid = acWheel.scrollLeft + acWheel.clientWidth / 2, best = null, bd = Infinity;
+      Array.prototype.forEach.call(acWheel.children, function(t){
+        var dd = Math.abs(t.offsetLeft + AW / 2 - mid);
+        if(dd < bd){ bd = dd; best = t; }
+      });
+      return best;
+    }
+    function acPaint(){
+      Array.prototype.forEach.call(acWheel.children, function(t){
+        var v = parseInt(t.dataset.v,10);
+        t.className = "tick" + (v === state.acVal ? " sel" : "") +
+          (state.acVal !== null && Math.abs(v - state.acVal) === 1 ? " near" : "");
+        t.setAttribute("aria-selected", v === state.acVal ? "true" : "false");
+      });
+      acFrame.className = "wheel-frame" + (state.acVal === null ? "" : " live");
+      acShow.textContent = (state.acVal === null) ? "\u2013" : state.acVal;
+    }
+    function acPick(v){
+      state.acVal = v; acPaint();
+      cards.forEach(function(o){ if(o !== card) o.setAC(v); });
+      refreshAll();
+    }
+    acWheel.addEventListener("scroll", function(){
+      if(acLock) return;
+      clearTimeout(acTimer);
+      acTimer = setTimeout(function(){
+        var t = acNearest(); if(!t) return;
+        var v = parseInt(t.dataset.v,10);
+        if(v !== state.acVal) acPick(v);
+      }, 90);
+    }, { passive:true });
+    acWheel.addEventListener("click", function(e){
+      var t = e.target.closest(".tick"); if(!t) return;
+      var v = parseInt(t.dataset.v,10);
+      acCenter(v); acPick(v);
+    });
+
+    /* ---- d20 wheel ---- */
+    var lockScroll = false, scrollTimer;
+    function padWheel(){
+      var w = wheel.clientWidth; if(!w) return;
+      var side = Math.max(0, (w - 52) / 2);
+      wheel.style.paddingLeft = side + "px";
+      wheel.style.paddingRight = side + "px";
+      centerOn(state.face || 10, "auto");
+    }
+    function centerOn(v, behavior){
+      var t = wheel.querySelector('.tick[data-v="' + v + '"]'); if(!t) return;
+      lockScroll = true;
+      var left = t.offsetLeft - wheel.clientWidth / 2 + 26;
+      if(wheel.scrollTo) wheel.scrollTo({ left:left, behavior:behavior || "smooth" });
+      else wheel.scrollLeft = left;
+      setTimeout(function(){ lockScroll = false; }, 260);
+    }
+    function nearestTick(){
+      var mid = wheel.scrollLeft + wheel.clientWidth / 2, best = null, bd = Infinity;
+      Array.prototype.forEach.call(wheel.children, function(t){
+        var dd = Math.abs(t.offsetLeft + 26 - mid);
+        if(dd < bd){ bd = dd; best = t; }
+      });
+      return best;
+    }
+    function paintTicks(){
+      var s = state.face;
+      Array.prototype.forEach.call(wheel.children, function(t){
+        var v = parseInt(t.dataset.v,10);
+        t.className = "tick" +
+          (v === s ? " sel" + (v === 20 ? " hot" : v === 1 ? " cold" : "") : "") +
+          (s && Math.abs(v - s) === 1 ? " near" : "");
+        t.setAttribute("aria-selected", v === s ? "true" : "false");
+      });
+      frame.className = "wheel-frame" + (s ? " live" : "");
+    }
+    wheel.addEventListener("scroll", function(){
+      if(lockScroll) return;
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(function(){
+        var t = nearestTick(); if(!t) return;
+        var v = parseInt(t.dataset.v,10);
+        if(v !== state.face){ state.face = v; paintTicks(); refreshAll(); }
+      }, 90);
+    }, { passive:true });
+    wheel.addEventListener("click", function(e){
+      var t = e.target.closest(".tick"); if(!t) return;
+      state.face = parseInt(t.dataset.v,10);
+      centerOn(state.face); paintTicks(); refreshAll();
+    });
+
+    kill.addEventListener("click", function(){
+      var doomed = card.groupId
+        ? cards.filter(function(c){ return c.groupId === card.groupId; })
+        : [card];
+      if(doomed.length >= cards.length) return;
+      cards = cards.filter(function(c){ return doomed.indexOf(c) === -1; });
+      doomed.forEach(function(c){ c.remove(); });
+      renumber(); refreshAll();
+    });
+
+    /* ---- recalc ---- */
+    card.recalc = function(ctx){
+      var t = state.type;
+      var k = cfg(t);
+      if(!typeLocked) pairNote.textContent = t ? "" : "pick one \u2014 the boxes above tick themselves";
+      var mercy = LEVELS[G.level].mercy;
+      var unarmed = k.kind === "unarmed";
+      var f = state.face;
+      var isCrit = (f === 20);
+
+      card.classList.toggle("is-crit", isCrit);
+
+      // Hand of Harm: Mercy only, unarmed only, once per turn
+      var harmAllowed = mercy && unarmed && !!t;
+      if(!harmAllowed && harmChk.checked) harmChk.checked = false;
+      harmWrap.className = "row harm" + (harmAllowed ? "" : " muted");
+      harmChk.disabled = !harmAllowed || (ctx.harmTaken && !harmChk.checked);
+
+      // Tavern Brawler push: unarmed only, once per turn
+      var pushAllowed = unarmed && !!t;
+      if(!pushAllowed && pushChk.checked) pushChk.checked = false;
+      pushWrap.className = "row" + (pushAllowed ? "" : " muted");
+      pushChk.disabled = !pushAllowed || (ctx.pushTaken && !pushChk.checked);
+
+      var harmLive = harmChk.checked;
+
+      dieRows.forEach(function(e){
+        var blocked = e.harm && !harmLive;
+        e.row.className = "die-row" + (e.harm ? " harm" : "") + (blocked ? " muted" : "");
+        if(blocked){ e.main.value = null; e.crit.value = null; }
+        e.main.paint(blocked);
+        e.crit.paint(blocked || !isCrit);
+        e.crit.node.style.display = (isCrit && !blocked) ? "" : "none";
+        if(!isCrit) e.crit.value = null;
+      });
+
+      // to hit
+      var am = sumMods(atkBox);
+      if(f === null){
+        bigN.textContent = "\u2013"; bigN.className = "n empty";
+        math.innerHTML = am.parts.length ? "ready: " + am.parts.join(" \u00b7 ")
+                                         : "Pick the d20 face you rolled";
+        readout.className = "readout";
+        acVerdict.className = "verdict"; acVerdict.textContent = "";
+        attackNote.innerHTML = "";
+      } else {
+        bigN.textContent = f + am.total; bigN.className = "n";
+        math.innerHTML = "<b>" + f + "</b> rolled" +
+          (am.parts.length ? " \u00b7 " + am.parts.join(" \u00b7 ") : "");
+        readout.className = "readout" + (f === 20 ? " crit" : f === 1 ? " fumble" : "");
+        if(f === 20){ acVerdict.className = "verdict crit"; acVerdict.textContent = "critical"; }
+        else if(f === 1){ acVerdict.className = "verdict miss"; acVerdict.textContent = "miss"; }
+        else if(state.acVal !== null){
+          var hit = (f + am.total) >= state.acVal;
+          acVerdict.className = "verdict " + (hit ? "hit" : "miss");
+          acVerdict.textContent = hit ? "hit" : "miss";
+        } else { acVerdict.className = "verdict"; acVerdict.textContent = ""; }
+
+        attackNote.innerHTML =
+          f === 1
+            ? '<div class="note bad"><span class="tag">Rescue</span><span>Natural 1, automatic miss. ' +
+              '<b>Heroic Inspiration</b> rerolls it and you must keep the new die. ' +
+              '<b>Lucky</b> gives Advantage \u2014 a second d20, keep the higher. ' +
+              'Swipe to the face you keep.</span></div>'
+          : f === 20
+            ? '<div class="note"><span class="tag">Crit</span><span>Natural 20, automatic hit. ' +
+              '<b>Crit rows are open below</b> \u2014 roll every damage die a second time and tap it. ' +
+              'Flat modifiers are not doubled.</span></div>'
+            : "";
+      }
+
+      // damage
+      var dm = sumMods(dmgBox);
+      var mainSum = 0, harmSum = 0, mainFaces = [], harmFaces = [], hasOne = false, any = false;
+      dieRows.forEach(function(e){
+        if(e.row.className.indexOf("muted") !== -1) return;
+        [e.main, e.crit].forEach(function(st){
+          if(st.value === null) return;
+          if(st === e.crit && !isCrit) return;
+          any = true;
+          if(e.harm){ harmSum += st.value; harmFaces.push(String(st.value)); }
+          else {
+            mainSum += st.value; mainFaces.push(String(st.value));
+            if(st.value === 1 && unarmed) hasOne = true;
+          }
+        });
+      });
+
+      var miss = (f === 1);
+      var primary = mainFaces.length ? Math.max(0, mainSum + dm.total) : 0;
+      var necro = harmFaces.length ? harmSum + WIS : 0;
+      var total = miss ? 0 : primary + necro;
+      var dmgType = k.type;
+
+      if(!any){
+        dmgN.textContent = "\u2013"; dmgN.className = "n empty";
+        dmgLab.innerHTML = "Damage";
+        breakdown.innerHTML = "";
+      } else {
+        dmgN.textContent = total; dmgN.className = "n";
+        dmgLab.innerHTML = "Damage" + (isCrit ? " <span style='color:var(--key-hi)'>crit</span>" : "") +
+          (miss ? " <span style='color:var(--dim)'>missed</span>" : "");
+        var rows = "";
+        if(primary){
+          rows += '<div class="brk"><span class="t">' + dmgType + '</span>' +
+                  '<span class="d">' + mainFaces.join(" + ") +
+                  (dm.total ? " + " + dm.total : "") + '</span>' +
+                  '<span class="v">' + (miss ? 0 : primary) + '</span></div>';
+        }
+        if(necro){
+          rows += '<div class="brk necro"><span class="t">necrotic</span>' +
+                  '<span class="d">' + harmFaces.join(" + ") + ' + ' + WIS + '</span>' +
+                  '<span class="v">' + (miss ? 0 : necro) + '</span></div>';
+        }
+        breakdown.innerHTML = rows;
+      }
+
+      dmgNote.innerHTML = hasOne
+        ? '<div class="note soft"><span class="tag">Brawler</span><span>An unarmed damage die ' +
+          'shows <b>1</b>. Tavern Brawler lets you reroll it \u2014 tap the new face. ' +
+          'Unarmed only, and never the Hand of Harm die.</span></div>'
+        : "";
+
+      card.readout = {
+        type: t, label: t ? k.label : "", kind: k.kind,
+        face: f, crit: isCrit, fumble: miss,
+        atkParts: am.parts.slice(),
+        atkTotal: (f === null) ? null : f + am.total,
+        ac: state.acVal,
+        mainFaces: mainFaces.slice(), harmFaces: harmFaces.slice(),
+        dmgTotal: dm.total, dmgType: dmgType,
+        primary: miss ? 0 : primary, necro: miss ? 0 : necro,
+        harm: harmLive, push: pushChk.checked,
+        any: any
+      };
+    };
+
+    card.getType = function(){ return state.type; };
+    card.setType = function(v){ state.type = v; paintPicker(); };
+    card.getHarm = function(){ return harmChk.checked; };
+    card.getPush = function(){ return pushChk.checked; };
+    card.getAC = function(){ return state.acVal; };
+    card.setAC = function(v){
+      if(v === null || state.acVal !== null) return;
+      state.acVal = v; acCenter(v,"auto"); acPaint();
+    };
+    card.getSplit = function(){
+      var r = card.readout;
+      if(!r || !r.any) return null;
+      return { type:r.dmgType, primary:r.primary, necro:r.necro };
+    };
+    card.clearRolls = function(){
+      state.face = null;
+      paintTicks(); centerOn(10,"auto");
+      dieRows.forEach(function(e){ e.main.value = null; e.crit.value = null; });
+      harmChk.checked = false;
+      pushChk.checked = false;
+    };
+    card.rebuildTypes = rebuildTypes;
+    card.lockType = function(on){
+      typeLocked = on;
+      paintPicker();
+      pairNote.textContent = on ? "second strike of the Flurry \u2014 set on the first card" : "";
+    };
+    card.setIndex = function(n){
+      idx.textContent = "Strike " + n + (card.groupId ? " \u00b7 Flurry " + card.part + " of 2" : "");
+    };
+    card.setRemovable = function(on){ kill.className = "kill" + (on ? "" : " hidden"); };
+
+    if(cards.length) card.setAC(cards[0].getAC());
+    if(after && after.parentNode === host){
+      host.insertBefore(card, after.nextSibling);
+      cards.splice(cards.indexOf(after) + 1, 0, card);
+    } else {
+      host.appendChild(card);
+      cards.push(card);
+    }
+    padWheel(); acPad(); acPaint(); paintTicks();
+    window.addEventListener("resize", function(){ padWheel(); acPad(); });
+    return card;
+  }
+
+  function partnerOf(card){
+    for(var i = 0; i < cards.length; i++){
+      if(cards[i] !== card && cards[i].groupId && cards[i].groupId === card.groupId) return cards[i];
+    }
+    return null;
+  }
+
+  function onTypeChange(card){
+    var t = card.getType();
+    if(cfg(t).paired){
+      if(!card.groupId){
+        card.groupId = ++groupSeq;
+        card.part = 1;
+        var partner = makeCard(card);
+        partner.groupId = card.groupId;
+        partner.part = 2;
+        partner.setType(t);
+        partner.lockType(true);
+      }
+    } else if(card.groupId){
+      var p = partnerOf(card);
+      if(p){
+        cards = cards.filter(function(c){ return c !== p; });
+        p.remove();
+      }
+      card.groupId = null; card.part = null; card.lockType(false);
+    }
+    renumber(); refreshAll();
+  }
+
+  function renumber(){
+    cards.forEach(function(c,i){
+      c.setIndex(i+1);
+      var pairSize = c.groupId
+        ? cards.filter(function(x){ return x.groupId === c.groupId; }).length : 1;
+      c.setRemovable(cards.length > pairSize);
+    });
+  }
+
+  /* ================= turn totals ================= */
+  function turnSplit(){
+    var byType = {}, total = 0, n = 0;
+    cards.forEach(function(c){
+      var sp = c.getSplit();
+      if(!sp) return;
+      n++;
+      total += sp.primary + sp.necro;
+      if(sp.primary) byType[sp.type] = (byType[sp.type] || 0) + sp.primary;
+      if(sp.necro) byType.necrotic = (byType.necrotic || 0) + sp.necro;
+    });
+    return { byType:byType, total:total, count:n };
+  }
+
+  function pendingFocus(){
+    var flurryGroups = [], harmTaken = false;
+    cards.forEach(function(c){
+      if(c.getHarm()) harmTaken = true;
+      if(c.getType() === "flurry" && flurryGroups.indexOf(c.groupId) === -1) flurryGroups.push(c.groupId);
+    });
+    var n = 0;
+    n += flurryGroups.length;
+    if(harmTaken) n += 1;
+    if(G.pd && G.pdMode === "focus") n += 1;
+    if(G.sw && G.swMode === "focus") n += 1;
+    if(G.deflect && G.deflectMode === "redirect") n += 1;
+    if(G.heal && G.healMode === "action") n += 1;
+    return n;
+  }
+
+  /* ================= global refresh ================= */
+  function refreshAll(){
+    var L = LEVELS[G.level];
+
+    var harmTaken = false, pushTaken = false;
+    cards.forEach(function(c){
+      if(c.getHarm()) harmTaken = true;
+      if(c.getPush()) pushTaken = true;
+    });
+    var ctx = { harmTaken:harmTaken, pushTaken:pushTaken };
+    cards.forEach(function(c){ c.recalc(ctx); });
+
+    // action economy
+    var actions = 0, bonusSingles = 0, flurryGroups = [], flurryStrikes = 0, unset = 0;
+    cards.forEach(function(c){
+      var t = c.getType();
+      if(!t){ unset++; return; }
+      if(isAction(t)) actions++;
+      else if(t === "flurry"){
+        flurryStrikes++;
+        if(flurryGroups.indexOf(c.groupId) === -1) flurryGroups.push(c.groupId);
+      } else bonusSingles++;
+    });
+    var hasFlurry = flurryGroups.length > 0;
+    var healAction = (G.heal && G.healMode === "action") ? 1 : 0;
+    actions += healAction;
+    var bonus = bonusSingles + flurryGroups.length + (G.pd ? 1 : 0) + (G.sw ? 1 : 0);
+    var reaction = (G.reaction || G.deflect) ? 1 : 0;
+
+    var counts = { action:actions, bonus:bonus, reaction:reaction };
+    document.querySelectorAll(".slot").forEach(function(s){
+      var n = counts[s.dataset.k];
+      s.className = "slot" + (s.dataset.k === "reaction" ? " tap" : "") +
+        (n > 1 ? " used over" : n === 1 ? " used" : "");
+      s.querySelector(".box").textContent = n > 1 ? n : "\u2713";
+    });
+
+    // focus
+    var pending = pendingFocus();
+    var spent = bankedFocus + pending;
+    var left = L.focus - spent;
+    var pipHost = $("focusPips");
+    Array.prototype.forEach.call(pipHost.children, function(p,i){
+      p.className = "pip" + (i < Math.max(0,left) ? "" : " out");
+    });
+    $("focusRow").className = "track" + (left < 0 ? " over" : left === 0 ? " drained" : "");
+    $("focusCount").textContent = left < 0
+      ? Math.abs(left) + " over \u2014 he doesn't have it"
+      : left + " of " + L.focus + " left";
+    $("fpNote").innerHTML = "banked " + bankedFocus + " &middot; this turn " + pending;
+    var uu = $("uncannyUse");
+    uu.disabled = uncannyUsed;
+    uu.className = uncannyUsed ? "" : "armed";
+    uu.textContent = uncannyUsed ? "Spent" : "Use";
+    $("uncannyRoll").hidden = !(L.uncanny && uncannyUsed);
+    if(L.uncanny){
+      var ud = uncannyStrip.value;
+      var uo = $("uncannyOut");
+      if(uo) uo.innerHTML = (ud === null)
+        ? "Tap the d6 you rolled."
+        : "Heals <b>" + (ud + G.level) + " hit points</b> &middot; " + ud + " + " + G.level;
+    }
+
+    // luck and inspiration
+    var luckLeft = luck.filter(function(x){ return !x; }).length;
+    Array.prototype.forEach.call($("luckPips").children, function(p,i){
+      p.className = "pip tapme" + (luck[i] ? " out" : "");
+    });
+    $("luckRow").className = "track" + (luckLeft === 0 ? " drained" : "");
+    $("luckCount").textContent = luckLeft + " of 2 left \u00b7 tap to spend";
+    $("inspPips").children[0].className = "pip insp tapme" + (inspUsed ? " out" : "");
+    $("inspRow").className = "track" + (inspUsed ? " drained" : "");
+    $("inspCount").textContent = inspUsed ? "spent \u00b7 back on a long rest" : "available \u00b7 tap to spend";
+
+    // deflect readouts
+    if(G.deflect){
+      var d10 = deflectStrip.value;
+      $("deflectOut").innerHTML = (d10 === null)
+        ? "Tap the d10 you rolled."
+        : "Reduces the damage by <b>" + (d10 + DEX + G.level) + "</b> &middot; " +
+          d10 + " + Dex " + DEX + " + level " + G.level;
+      if(G.deflectMode === "redirect"){
+        var a = redirectA.value, b = redirectB.value;
+        $("redirectOut").innerHTML = (a === null || b === null)
+          ? "Tap both Martial Arts dice."
+          : "<b class=\"v\">" + (a + b + DEX) + " damage</b> on a failed Dex save &middot; " +
+            a + " + " + b + " + Dex " + DEX;
+      }
+    }
+
+    // healing readout
+    if(G.heal){
+      var hv = healStrip.value;
+      $("healOut").innerHTML = (hv === null)
+        ? "Tap the d6 you rolled."
+        : "Restores <b>" + (hv + WIS) + " hit points</b> &middot; " + hv + " + Wis " + WIS;
+    }
+
+    // warnings and notes
+    var warn = [], note = [];
+    if(actions > 1) warn.push("<b>" + actions + " actions</b> \u2014 he gets one");
+    if(bonus > 1) warn.push("<b>" + bonus + " bonus actions</b> \u2014 he gets one");
+    if(flurryStrikes > 2) warn.push("<b>" + flurryStrikes + " Flurry strikes</b> \u2014 Flurry is two");
+    if(left < 0) warn.push("<b>Out of focus</b> by " + Math.abs(left));
+    if(G.heal && G.healMode === "flurry" && !hasFlurry)
+      warn.push("<b>No Flurry to swap</b> \u2014 add one, or switch the heal to the Magic action");
+    if(bonusSingles > 0 && actions === 0)
+      warn.push("<b>The free bonus strike needs an Attack action</b> first");
+
+    if(hasFlurry) note.push("Flurry of Blows: two strikes, one bonus action, one focus point.");
+    if(G.heal && G.healMode === "flurry" && hasFlurry)
+      note.push("One Flurry strike becomes the heal \u2014 delete that strike card.");
+    if(harmTaken) note.push("Hand of Harm is once per turn and costs a focus point.");
+    if(G.deflect) note.push("Deflect Attacks is spending your reaction.");
+
+    var lines = [];
+    if(warn.length) lines.push(warn.join("<br>"));
+    if(note.length) lines.push("<i>" + note.join("</i><br><i>") + "</i>");
+    if(!lines.length){
+      lines.push(unset
+        ? "Pick a strike on each card and the boxes tick themselves."
+        : (G.level === 1
+           ? "Attack action, then the free bonus strike. That is the whole turn at level 1."
+           : "Everything balances. Tap Reaction if you spent one on something else."));
+    }
+    $("econNote").innerHTML = lines.join("<br>");
+
+    renderReadout();
+
+    var t = turnSplit();
+    $("turnTotal").textContent = t.total;
+    var parts = Object.keys(t.byType).map(function(k){ return k + " " + t.byType[k]; });
+    $("runs").textContent = parts.length ? parts.join(" \u00b7 ") : "nothing yet";
+    $("commit").disabled = (t.count === 0);
+    $("lastTurn").textContent = (lastTurn === null) ? "\u2013" : lastTurn;
+    $("bestTurn").textContent = (bestTurn === null) ? "\u2013" : bestTurn;
+  }
+
+  /* ================= turn readout ================= */
+  function renderReadout(){
+    var html = "", rolled = 0, hits = 0, misses = 0, grand = 0, byType = {};
+    cards.forEach(function(c, i){
+      var r = c.readout;
+      if(!r) return;
+      var entered = (r.face !== null) || r.any;
+      if(!entered) return;
+      rolled++;
+
+      var verdict = "", vcls = "";
+      if(r.crit){ verdict = "critical"; vcls = "crit"; hits++; }
+      else if(r.fumble){ verdict = "miss"; vcls = "miss"; misses++; }
+      else if(r.face !== null && r.ac !== null){
+        var hit = r.atkTotal >= r.ac;
+        verdict = hit ? "hit" : "miss"; vcls = hit ? "hit" : "miss";
+        hit ? hits++ : misses++;
+      }
+
+      var atk = (r.face === null) ? "not rolled"
+        : "<b>" + r.face + "</b> rolled \u2192 <b>" + r.atkTotal + "</b>" +
+          (r.ac !== null ? " vs AC " + r.ac : "");
+
+      var dmgBits = [];
+      if(r.mainFaces.length){
+        dmgBits.push(r.mainFaces.join(" + ") + (r.dmgTotal ? " + " + r.dmgTotal : "") +
+          " = <b>" + r.primary + "</b> " + r.dmgType);
+      }
+      if(r.harmFaces.length){
+        dmgBits.push(r.harmFaces.join(" + ") + " + " + WIS + " = <em>" + r.necro + " necrotic</em>");
+      }
+      var total = r.any ? (r.primary + r.necro) : null;
+      if(total !== null){
+        grand += total;
+        if(r.primary) byType[r.dmgType] = (byType[r.dmgType] || 0) + r.primary;
+        if(r.necro) byType.necrotic = (byType.necrotic || 0) + r.necro;
+      }
+
+      var extras = [];
+      if(r.push) extras.push("pushed 5 ft");
+      if(r.harm) extras.push("Hand of Harm");
+
+      html += '<div class="ro">' +
+        '<div class="ro-head">' +
+          '<span class="n">Strike ' + (i+1) + '</span>' +
+          '<span class="t">' + (r.label ? esc(r.label) : "no type set") + '</span>' +
+          (verdict ? '<span class="v ' + vcls + '">' + verdict + '</span>' : '') +
+        '</div>' +
+        '<div class="ro-body"><div class="ro-lines">' +
+          '<div class="ro-line"><span class="k">to hit</span><span class="f">' + atk + '</span></div>' +
+          (dmgBits.length ? '<div class="ro-line"><span class="k">damage</span><span class="f">' +
+             dmgBits.join(" &middot; ") + '</span></div>' : '') +
+          (extras.length ? '<div class="ro-line"><span class="k">rider</span><span class="f">' +
+             extras.join(" &middot; ") + '</span></div>' : '') +
+        '</div>' +
+        '<div class="ro-total' + (total === null ? ' none' : '') + '">' +
+          (total === null ? "&ndash;" : total) + '</div>' +
+        '</div></div>';
+    });
+
+    $("readout").innerHTML = html;
+    if(!rolled){
+      $("roSum").innerHTML = "nothing rolled yet";
+      return;
+    }
+    var parts = Object.keys(byType).map(function(k){ return "<b>" + byType[k] + "</b> " + k; });
+    var verdictLine = (hits + misses === 0)
+      ? rolled + " strike" + (rolled === 1 ? "" : "s") + " entered"
+      : "<b>" + hits + "</b> hit &middot; <b>" + misses + "</b> missed";
+    $("roSum").innerHTML = verdictLine +
+      (parts.length ? "<br>" + parts.join(" &middot; ") : "") +
+      '<br><span class="big">' + grand + '</span> total this turn';
+  }
+
+  /* ================= history ================= */
+  function renderHistory(){
+    $("histCount").textContent = history.length + (history.length === 1 ? " turn" : " turns");
+    if(!history.length){
+      $("hist").innerHTML = '<div class="hist-empty">No turns committed yet this session.</div>';
+      return;
+    }
+    var html = "";
+    history.forEach(function(e, i){
+      var lines = e.strikes.map(function(st){
+        var verdict = st.crit ? "crit" : st.fumble ? "nat 1"
+          : (st.ac !== null && st.atk !== null) ? (st.atk >= st.ac ? "hit" : "miss") : "";
+        var roll = (st.face === null) ? "not rolled"
+          : st.face + " \u2192 <b>" + st.atk + "</b>" + (st.ac !== null ? " vs " + st.ac : "");
+        var dm = st.faces.concat(st.harm.map(function(f){ return f + "n"; })).join("+");
+        return "&middot; " + esc(st.label || st.type) + " &nbsp;" + roll +
+               (verdict ? " <b>" + verdict + "</b>" : "") +
+               (dm ? " &nbsp;dmg " + dm : "");
+      }).join("<br>");
+      var types = Object.keys(e.byType).map(function(k){ return e.byType[k] + " " + k; }).join(" \u00b7 ");
+      html += '<div class="ht">' +
+        '<div class="ht-head"><span class="n">Turn ' + (i+1) + '</span>' +
+        '<span class="tm">' + e.time + " \u00b7 L" + e.level +
+        (e.focus ? " \u00b7 " + e.focus + " focus" : "") + '</span>' +
+        '<span class="tot">' + e.total + '</span></div>' +
+        '<div class="ht-line">' + (types ? types + "<br>" : "") + lines + '</div>' +
+      '</div>';
+    });
+    $("hist").innerHTML = html;
+  }
+
+  /* ================= turn lifecycle ================= */
+  function freshTurn(){
+    var keepAC = cards.length ? cards[0].getAC() : null;
+    cards.slice().forEach(function(c){ c.remove(); });
+    cards = [];
+    G.reaction = false;
+    setSwitch("pd", false); setSwitch("sw", false);
+    setSwitch("deflect", false); setSwitch("heal", false);
+    var fresh = makeCard();
+    if(keepAC !== null) fresh.setAC(keepAC);
+    renumber(); refreshAll();
+    if(window.scrollTo) try{ window.scrollTo({ top:0, behavior:"smooth" }); }catch(e){}
+  }
+
+  function clearRolls(){
+    cards.forEach(function(c){ c.clearRolls(); });
+    G.reaction = false;
+    deflectStrip.value = null; redirectA.value = null; redirectB.value = null;
+    healStrip.value = null;
+    refreshAll();
+  }
+
+  var armed = null, armTimer = null;
+  function disarm(){
+    if(armed){
+      armed.el.textContent = armed.label;
+      armed.el.className = armed.cls;
+      armed = null;
+    }
+    clearTimeout(armTimer);
+  }
+  function confirmTap(node, prompt, act){
+    if(armed && armed.el === node){
+      var fn = armed.act; disarm(); fn(); return;
+    }
+    disarm();
+    armed = { el:node, label:node.textContent, cls:node.className, act:act };
+    node.textContent = prompt;
+    node.className = armed.cls + " arm";
+    armTimer = setTimeout(disarm, 4000);
+  }
+  document.addEventListener("click", function(e){
+    if(armed && !armed.el.contains(e.target)) disarm();
+  }, true);
+
+  function doCommit(){
+    var t = turnSplit();
+    if(!t.count) return;
+    lastTurn = t.total;
+    var isBest = (bestTurn === null) || (t.total > bestTurn);
+    if(isBest) bestTurn = t.total;
+    var bw = $("bestWrap");
+    bw.className = "st best" + (isBest ? " fresh" : "");
+    setTimeout(function(){ bw.className = "st best"; }, 600);
+
+    var spent = pendingFocus();
+    bankedFocus += spent;
+
+    var entry = { time:clockNow(), level:G.level, total:t.total, byType:t.byType,
+                  focus:spent, strikes:[] };
+    cards.forEach(function(c){
+      var r = c.readout;
+      if(!r) return;
+      if(r.face === null && !r.any) return;
+      entry.strikes.push({
+        type:r.type, label:r.label, face:r.face, atk:r.atkTotal, ac:r.ac,
+        crit:r.crit, fumble:r.fumble,
+        faces:r.mainFaces.slice(), harm:r.harmFaces.slice()
+      });
+    });
+    history.push(entry);
+    renderHistory();
+    freshTurn();
+  }
+
+  $("commit").addEventListener("click", function(){
+    if(!turnSplit().count) return;
+    confirmTap(this, "Confirm?", doCommit);
+  });
+  $("discard").addEventListener("click", function(){
+    confirmTap(this, "Discard?", freshTurn);
+  });
+  $("clearRolls").addEventListener("click", clearRolls);
+  $("histToggle").addEventListener("click", function(){
+    var h = $("hist");
+    h.hidden = !h.hidden;
+    this.textContent = h.hidden ? "Show history" : "Hide history";
+  });
+  $("sessionReset").addEventListener("click", function(){
+    confirmTap(this, "Reset?", startSession);
+  });
+  $("addAttack").addEventListener("click", function(){
+    var c = makeCard();
+    renumber(); refreshAll();
+    if(c.scrollIntoView) c.scrollIntoView({ behavior:"smooth", block:"start" });
+  });
+
+  function startSession(){
+    history = [];
+    sessionDay = today();
+    bankedFocus = 0;
+    uncannyUsed = false;
+    luck = [false,false];
+    inspUsed = false;
+    uncannyStrip.value = null;
+    lastTurn = null; bestTurn = null;
+    freshTurn();
+    renderHistory();
+  }
+
+  /* ================= level ================= */
+  function setLevel(n){
+    G.level = n;
+    document.querySelectorAll(".lvlBtn").forEach(function(b){
+      b.setAttribute("aria-pressed", parseInt(b.dataset.l,10) === n ? "true" : "false");
+    });
+    var L = LEVELS[n];
+
+    $("whoSub").textContent = "Monk " + n + (L.mercy ? " \u00b7 Mercy" : "");
+    $("vHP").textContent = L.hp;
+    $("vSpd").textContent = L.speed;
+    $("cClass").textContent = "Monk " + n;
+    $("cSub").innerHTML = L.mercy
+      ? "Warrior of Mercy <small>Hand of Harm, Hand of Healing, Implements of Mercy</small>"
+      : "None yet <small>Warrior of Mercy at level 3</small>";
+    $("cSkills").textContent = L.mercy
+      ? "Acrobatics +5, History +1, Insight +5, Medicine +5, Stealth +5, Survival +5"
+      : "Acrobatics +5, History +1, Medicine +5, Stealth +5, Survival +5";
+
+    var pipHost = $("focusPips");
+    pipHost.innerHTML = "";
+    for(var i = 0; i < L.focus; i++) pipHost.appendChild(el("span","pip"));
+    $("focusRow").hidden = (L.focus === 0);
+    $("fpTools").hidden = (L.focus === 0);
+    $("uncannyBar").hidden = !L.uncanny;
+    $("blkMoves").hidden = (n === 1);
+    $("effDeflect").hidden = !L.deflect;
+    $("blkMercy").hidden = !L.mercy;
+
+    bankedFocus = 0;
+    setSwitch("pd", false); setSwitch("sw", false);
+    setSwitch("deflect", false); setSwitch("heal", false);
+
+    buildFeatures();
+    buildPlan();
+    buildChecks();
+    freshTurn();
+  }
+
+  /* ================= character card ================= */
+  var FEATURES = [
+    { lv:1, name:"Martial Arts", tag:"d6",
+      tx:"Dexterity on unarmed strikes and monk weapons, and the d6 replaces their normal damage. Take the Attack action and one more unarmed strike comes free as a bonus action." },
+    { lv:1, name:"Unarmored Defense", tag:"AC 16",
+      tx:"10 + Dexterity + Wisdom, as long as he wears no armor and carries no shield." },
+    { lv:1, name:"Resourceful", tag:"human",
+      tx:"Heroic Inspiration back after every long rest. Spend it to reroll any d20." },
+    { lv:1, name:"Tavern Brawler", tag:"feat",
+      tx:"Reroll a 1 on the unarmed damage die. Once per turn, a hit shoves the target 5 feet. Improvised weapons count as weapons." },
+    { lv:1, name:"Lucky", tag:"feat",
+      tx:"Two luck points a day. Spend one for Advantage on a d20 test, or to give an attacker Disadvantage against him. This is Advantage, not a reroll \u2014 Heroic Inspiration is the reroll." },
+    { lv:2, name:"Flurry of Blows", tag:"1 focus",
+      tx:"Bonus action, two unarmed strikes instead of one." },
+    { lv:2, name:"Patient Defense", tag:"bonus",
+      tx:"Disengage free as a bonus action, or spend a focus point to Disengage and Dodge at once." },
+    { lv:2, name:"Step of the Wind", tag:"bonus",
+      tx:"Dash free as a bonus action, or spend a focus point to Dash and Disengage with double jump distance." },
+    { lv:2, name:"Uncanny Metabolism", tag:"1/rest",
+      tx:"Once between long rests, rolling initiative refills every focus point and heals him for his level plus a Martial Arts die." },
+    { lv:2, name:"Unarmored Movement", tag:"+10 ft",
+      tx:"Speed 40 while unarmored." },
+    { lv:3, name:"Deflect Attacks", tag:"reaction",
+      tx:"When a bludgeoning, piercing or slashing attack hits him, cut the damage by 1d10 + 6. Reduce it to nothing and he can spend a focus point to throw the force back: 2d6 + 3 on a failed Dexterity save against 13, nothing on a success." },
+    { lv:3, name:"Hand of Harm", tag:"1 focus", v:true,
+      tx:"Once per turn, an unarmed strike that hits deals an extra d6 + 3 necrotic. This is the hand he does not lead with." },
+    { lv:3, name:"Hand of Healing", tag:"1 focus", v:true,
+      tx:"Magic action to touch a creature and restore d6 + 3. Inside a Flurry, one strike can become this instead and the focus point is already paid." },
+    { lv:3, name:"Implements of Mercy", tag:"mercy", v:true,
+      tx:"Insight, Medicine and the Herbalism Kit. Medicine and the kit already came with the Combat Medic background \u2014 ask your organizer whether the duplicates can be traded." }
+  ];
+  function buildFeatures(){
+    var box = $("featList");
+    box.innerHTML = "";
+    FEATURES.forEach(function(f){
+      var locked = f.lv > G.level;
+      var d = el("div","feat" + (locked ? " locked" : ""));
+      d.innerHTML = "<b>" + f.name + "<span class=\"tag" + (f.v ? " v" : "") + "\">" +
+        (locked ? "level " + f.lv : f.tag) + "</span></b><p>" + f.tx + "</p>";
+      box.appendChild(d);
+    });
+  }
+
+  var PLAN = [
+    { lv:1, tx:"<b>Martial Arts, Unarmored Defense.</b> One attack, one free bonus strike, 11 hit points and no focus to spend. The medic kit does more work than the fists this level." },
+    { lv:2, tx:"<b>Monk's Focus.</b> Two focus points unlock Flurry of Blows, Patient Defense and Step of the Wind. Speed 40. Uncanny Metabolism refills the tank once a day." },
+    { lv:3, tx:"<b>Warrior of Mercy</b> and Deflect Attacks. Both hands arrive at once, and three focus points have to cover Flurry, Harm, Healing and the Deflect redirect.",
+      flag:"Confirm with your organizer: Implements of Mercy duplicates Medicine and the Herbalism Kit." },
+    { lv:4, tx:"<b>+2 Dexterity to 18.</b> AC 17, +6 to hit, +4 damage. Slow Fall for 20 feet of falling." },
+    { lv:5, tx:"<b>Extra Attack and Stunning Strike.</b> Martial Arts die goes to d8. Stunning Strike is once per turn against a Constitution save of 13." },
+    { lv:6, tx:"<b>Physician's Touch.</b> Hand of Harm also poisons until the end of his next turn; Hand of Healing also clears blinded, deafened, paralyzed, poisoned or stunned. Empowered Strikes make his fists force damage. Speed 45." }
+  ];
+  function buildPlan(){
+    var box = $("planList");
+    box.innerHTML = "";
+    PLAN.forEach(function(p){
+      var d = el("div","step" + (p.lv <= G.level ? " done" : ""));
+      d.innerHTML = '<span class="lv">L' + p.lv + '</span><span class="tx">' + p.tx +
+        (p.flag ? '<span class="flag">' + p.flag + '</span>' : '') + '</span>';
+      box.appendChild(d);
+    });
+  }
+
+
+  /* ================= checks, saves and skills ================= */
+  var ABIL = { str:{n:"Strength",m:-1}, dex:{n:"Dexterity",m:3}, con:{n:"Constitution",m:3},
+               int:{n:"Intelligence",m:-1}, wis:{n:"Wisdom",m:3}, cha:{n:"Charisma",m:-1} };
+  var SAVE_PROF = { str:true, dex:true };
+  var SKILLS = [
+    ["Acrobatics","dex",1],["Animal Handling","wis",0],["Arcana","int",0],
+    ["Athletics","str",0],["Deception","cha",0],["History","int",1],
+    ["Insight","wis","mercy"],["Intimidation","cha",0],["Investigation","int",0],
+    ["Medicine","wis",1],["Nature","int",0],["Perception","wis",0],
+    ["Performance","cha",0],["Persuasion","cha",0],["Religion","int",0],
+    ["Sleight of Hand","dex",0],["Stealth","dex",1],["Survival","wis",1]
+  ];
+  var TOOLS = [["Herbalism Kit","int",1],["Weaver's Tools","dex",1]];
+
+  var ck = { name:null, abil:null, prof:false, kind:"", dc:null, face:null };
+
+  function sgn(v){ return (v >= 0 ? "+" : "\u2212") + Math.abs(v); }
+
+  function chkButton(name, abilKey, prof, kind, sub){
+    var mod = ABIL[abilKey].m + (prof ? PROF : 0);
+    var b = el("button","chk" + (prof ? " prof" : ""));
+    b.type = "button";
+    b.innerHTML = '<span class="nm">' + name + '<em>' + (sub || ABIL[abilKey].n.slice(0,3)) +
+                  (prof ? " \u00b7 prof" : "") + '</em></span><span class="mv">' + sgn(mod) + '</span>';
+    b.addEventListener("click", function(){
+      var same = (ck.name === name && ck.kind === kind);
+      ck.name = same ? null : name;
+      ck.abil = same ? null : abilKey;
+      ck.prof = same ? false : prof;
+      ck.kind = same ? "" : kind;
+      paintChecks();
+    });
+    b._key = kind + "|" + name;
+    return b;
+  }
+
+  function buildChecks(){
+    var mercy = LEVELS[G.level].mercy;
+    var saves = $("grpSaves"), abils = $("grpAbil"), skills = $("grpSkills"), tools = $("grpTools");
+    saves.innerHTML = ""; abils.innerHTML = ""; skills.innerHTML = ""; tools.innerHTML = "";
+    Object.keys(ABIL).forEach(function(k){
+      saves.appendChild(chkButton(ABIL[k].n, k, !!SAVE_PROF[k], "save", "saving throw"));
+      abils.appendChild(chkButton(ABIL[k].n, k, false, "abil", "raw check"));
+    });
+    SKILLS.forEach(function(r){
+      var prof = (r[2] === "mercy") ? mercy : !!r[2];
+      skills.appendChild(chkButton(r[0], r[1], prof, "skill"));
+    });
+    TOOLS.forEach(function(r){
+      tools.appendChild(chkButton(r[0], r[1], !!r[2], "tool"));
+    });
+    paintChecks();
+  }
+
+  function paintChecks(){
+    var key = ck.name ? (ck.kind + "|" + ck.name) : null;
+    ["grpSaves","grpAbil","grpSkills","grpTools"].forEach(function(id){
+      Array.prototype.forEach.call($(id).children, function(b){
+        var on = (b._key === key);
+        b.className = "chk" + (b.className.indexOf("prof") !== -1 ? " prof" : "") + (on ? " on" : "");
+        b.setAttribute("aria-pressed", on ? "true" : "false");
+      });
+    });
+
+    var labelKind = { save:"saving throw", abil:"ability check", skill:"skill check", tool:"tool check" }[ck.kind] || "";
+    $("ckPicked").textContent = ck.name ? (ck.name + " " + labelKind) : "nothing picked";
+
+    $("ckDCval").textContent = (ck.dc === null) ? "\u2013" : ck.dc;
+
+    var rows = "", total = null;
+    if(!ck.name){
+      rows = '<div class="fx none"><span class="t">pick a check, save or skill above</span><span class="v">&ndash;</span></div>';
+    } else {
+      var mod = ABIL[ck.abil].m + (ck.prof ? PROF : 0);
+      rows += '<div class="fx' + (ck.face === null ? " none" : "") + '"><span class="t">d20 rolled</span>' +
+              '<span class="v">' + (ck.face === null ? "&ndash;" : ck.face) + '</span></div>';
+      rows += '<div class="fx"><span class="t">' + ABIL[ck.abil].n + '</span>' +
+              '<span class="v">' + sgn(ABIL[ck.abil].m) + '</span></div>';
+      if(ck.prof){
+        rows += '<div class="fx"><span class="t">Proficiency</span><span class="v">' + sgn(PROF) + '</span></div>';
+      }
+      if(ck.face !== null){
+        total = ck.face + mod;
+        rows += '<div class="fx sum"><span class="t">' + ck.name + " " +
+                (labelKind === "saving throw" ? "save" : "check") + '</span>' +
+                '<span class="v">' + total + '</span></div>';
+      }
+    }
+    $("ckFormula").innerHTML = rows;
+
+    var big = $("ckTotal"), lab = $("ckLab"), math = $("ckMath"), vd = $("ckVerdict");
+    if(total === null){
+      big.className = "n empty"; big.textContent = "\u2013";
+      lab.textContent = "Total";
+      math.innerHTML = ck.name
+        ? "Swipe the d20 face you rolled"
+        : "Pick a check above, then the d20 face you rolled";
+      vd.className = "verdict"; vd.textContent = "";
+    } else {
+      big.className = "n"; big.textContent = total;
+      lab.textContent = ck.name + " " + (ck.kind === "save" ? "save" : "check");
+      var mod2 = ABIL[ck.abil].m + (ck.prof ? PROF : 0);
+      math.innerHTML = "<b>" + ck.face + "</b> rolled \u00b7 " + ABIL[ck.abil].n + " " +
+                       sgn(ABIL[ck.abil].m) + (ck.prof ? " \u00b7 Proficiency " + sgn(PROF) : "") +
+                       " = <b>" + total + "</b>";
+      if(ck.dc === null){ vd.className = "verdict"; vd.textContent = ""; }
+      else {
+        var pass = total >= ck.dc;
+        vd.className = "verdict " + (pass ? "hit" : "miss");
+        vd.textContent = pass ? "success" : "failure";
+      }
+    }
+  }
+
+  var ckDC = makeWheel($("ckDCwheel"), 5, 30, 44, function(v){ ck.dc = v; paintChecks(); }, "Difficulty class");
+  var ckD20 = makeWheel($("ckD20wheel"), 1, 20, 52, function(v){ ck.face = v; paintChecks(); }, "d20 face");
+
+  /* ================= tabs ================= */
+  function showTab(which){
+    var map = { roll:["tabRoll","paneRoll"], checks:["tabChecks","paneChecks"], card:["tabCard","paneCard"] };
+    Object.keys(map).forEach(function(k){
+      var on = (k === which);
+      $(map[k][0]).setAttribute("aria-selected", on ? "true" : "false");
+      $(map[k][1]).hidden = !on;
+    });
+    $("turnBar").hidden = (which !== "roll");
+    document.body.style.paddingBottom = (which === "roll")
+      ? "calc(124px + env(safe-area-inset-bottom))"
+      : "calc(24px + env(safe-area-inset-bottom))";
+    if(which === "checks"){ ckDC.repad(); ckD20.repad(); }
+    window.scrollTo(0,0);
+  }
+  $("tabRoll").addEventListener("click", function(){ showTab("roll"); });
+  $("tabChecks").addEventListener("click", function(){ showTab("checks"); });
+  $("tabCard").addEventListener("click", function(){ showTab("card"); });
+  document.querySelectorAll(".lvlBtn").forEach(function(b){
+    b.addEventListener("click", function(){ setLevel(parseInt(b.dataset.l,10)); });
+  });
+
+  $("gateNew").addEventListener("click", function(){
+    startSession();
+    $("gate").hidden = true;
+  });
+  $("gateResume").addEventListener("click", function(){ $("gate").hidden = true; });
+
+  /* ================= boot ================= */
+  (function boot(){
+    setLevel(1);
+    renderHistory();
+    sessionDay = today();
+    $("gateLine").innerHTML = "Ready to play &middot; " + sessionDay +
+      "<br>A session covers one day. Starting a new one clears the history, the focus spend, " +
+      "the luck points and the turn records.";
+    $("gateResume").hidden = true;
+  })();
+})();
+</script>
+</body>
+</html>
